@@ -1,0 +1,425 @@
+#OPTS= -fast -qlanglvl=90std -qsmp=omp -qoffload #-O3
+#OPTS=-Mfixed  -fast -mp -g -Minfo=accel -Minfo=mp #-gpu=cc70 #pgi_compiler
+
+#OPTS=-fopenmp -foffload="-lm -latomic" 
+OPTS=-Mfixed -fast -g -cuda -mp=gpu -Minfo=mp,accel -gpu=cc70   #nvhpc compiler
+#OPTS=-O3 -h omp -h noacc -haccel=nvidia70
+MOD=-module  module
+#MOD=-mno-extern-sdata  module
+#LDFLAGS
+#LIBS= = -Wl,-rpath=$(OLCF_NVHPC_ROOT)/compilers/lib \
+           -Wl,-rpath=$(OLCF_NVHPC_ROOT)/math_libs/lib64 -lm
+FC=nvfortran #pgfortran
+#FC=gfortran
+#FC=pgfortran
+#FC=xlf90
+OBJS = 	obj/aax.o \
+	obj/aay.o \
+	obj/aaz.o \
+	obj/alpha_helix.o \
+	obj/aranzy.o \
+	obj/arcsh.o \
+	obj/avv.o \
+	obj/beta_sheet.o \
+	obj/connect.o \
+	obj/count_restrains.o \
+	obj/defo_C.o \
+	obj/defo_M.o \
+	obj/defo_N.o \
+	obj/di.o \
+	obj/di2.o \
+	obj/EHB.o \
+	obj/ei5.o \
+	obj/eigenvalue.o \
+	obj/energy_tot.o \
+	obj/energyHBa.o \
+	obj/energyHBb.o \
+	obj/ESHORT.o \
+	obj/get_acorder.o \
+	obj/get_bond.o \
+	obj/get_center.o \
+	obj/get_consensus.o \
+	obj/get_vvv.o \
+	obj/initial_move.o \
+	obj/LOOK.o \
+	obj/mcheck.o \
+	obj/metro.o \
+	obj/metro_swap.o \
+	obj/move2.o \
+	obj/move3d.o \
+	obj/move3s.o \
+	obj/move4d.o \
+	obj/move4s.o \
+	obj/move5d.o \
+	obj/move5s.o \
+	obj/move6.o \
+	obj/move7a.o \
+	obj/move7b.o \
+	obj/move8.o \
+	obj/move9.o \
+	obj/move_c_end.o \
+	obj/move_n_end.o \
+	obj/move_point.o \
+	obj/prepare_beta.o \
+	obj/prepare_frg.o \
+	obj/prepare_move2.o \
+	obj/prepare_move3.o \
+	obj/prepare_neighbors.o \
+	obj/prepare_vectors.o \
+	obj/random_initial.o \
+	obj/read_CAcontact.o \
+	obj/read_CAcontact8.o \
+	obj/read_concut.o \
+	obj/read_contactrestrain.o \
+	obj/read_distantrestrain.o \
+	obj/read_E13.o \
+	obj/read_E14.o \
+	obj/read_E15.o \
+	obj/read_exp.o \
+	obj/read_initial.o \
+	obj/read_longdistantrestrain.o \
+	obj/read_par.o \
+	obj/read_profile.o \
+	obj/read_quarsi3.o \
+	obj/read_seq.o \
+	obj/read_seqcontact.o \
+	obj/reset_temperature.o \
+	obj/rot_M.o \
+	obj/secondary.o \
+	obj/set_common.o \
+	obj/set_current.o \
+	obj/set_current_RS.o \
+	obj/set_EHB.o \
+	obj/set_move_retio.o \
+	obj/set_temperature.o \
+	obj/sort_ras.o \
+	obj/square2.o \
+	obj/swap.o \
+	obj/swap_RS.o \
+	obj/tasser.o \
+	obj/template_initial.o \
+	obj/template_simulation.o \
+	obj/test_neighbor.o \
+	obj/test_overlap.o \
+	obj/tran_C.o \
+	obj/tran_M.o \
+	obj/tran_N.o \
+	obj/triangle.o \
+	obj/trot_C.o \
+	obj/trot_M.o \
+	obj/trot_N.o \
+	obj/u3b.o \
+	obj/weight12.o \
+	obj/write_parameter.o \
+	obj/zyrmsd.o obj/mods.o
+
+MODS =  obj/mods.o obj/aax.o obj/aay.o obj/aaz.o obj/avv.o obj/ei5.o \
+	obj/energyHBa.o obj/energyHBb.o
+
+all: cas
+
+cas: $(OBJS) 
+	$(FC) $(OPTS) $(LDFLAGS) $(OBJS) -o cas
+
+obj/aax.o: src/aax.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/aax.f90 -o obj/aax.o 
+
+obj/aay.o: src/aay.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/aay.f90 -o obj/aay.o 
+
+obj/aaz.o: src/aaz.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/aaz.f90 -o obj/aaz.o 
+
+obj/alpha_helix.o: src/alpha_helix.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/alpha_helix.f90 -o obj/alpha_helix.o 
+
+obj/aranzy.o: src/aranzy.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/aranzy.f90 -o obj/aranzy.o 
+
+obj/arcsh.o: src/arcsh.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/arcsh.f90 -o obj/arcsh.o 
+
+obj/avv.o: src/avv.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/avv.f90 -o obj/avv.o 
+
+obj/beta_sheet.o: src/beta_sheet.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/beta_sheet.f90 -o obj/beta_sheet.o 
+
+obj/connect.o: src/connect.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/connect.f90 -o obj/connect.o 
+
+obj/count_restrains.o: src/count_restrains.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/count_restrains.f90 -o obj/count_restrains.o 
+
+obj/defo_C.o: src/defo_C.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/defo_C.f90 -o obj/defo_C.o 
+
+obj/defo_M.o: src/defo_M.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/defo_M.f90 -o obj/defo_M.o 
+
+obj/defo_N.o: src/defo_N.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/defo_N.f90 -o obj/defo_N.o 
+
+obj/di.o: src/di.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/di.f90 -o obj/di.o 
+
+obj/di2.o: src/di2.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/di2.f90 -o obj/di2.o 
+
+obj/EHB.o: src/EHB.f90 $(MODS) 
+	$(FC) -c $(OPTS) $(MOD) src/EHB.f90 -o obj/EHB.o 
+
+obj/ei5.o: src/ei5.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/ei5.f90 -o obj/ei5.o 
+
+obj/eigenvalue.o: src/eigenvalue.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/eigenvalue.f90 -o obj/eigenvalue.o 
+
+obj/energy_tot.o: src/energy_tot.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/energy_tot.f90 -o obj/energy_tot.o 
+
+obj/energyHBa.o: src/energyHBa.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/energyHBa.f90 -o obj/energyHBa.o 
+
+obj/energyHBb.o: src/energyHBb.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/energyHBb.f90 -o obj/energyHBb.o 
+
+obj/ESHORT.o: src/ESHORT.f90 $(MODS) 
+	$(FC) -c $(OPTS) $(MOD) src/ESHORT.f90 -o obj/ESHORT.o 
+
+obj/get_acorder.o: src/get_acorder.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/get_acorder.f90 -o obj/get_acorder.o 
+
+obj/get_bond.o: src/get_bond.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/get_bond.f90 -o obj/get_bond.o 
+
+obj/get_center.o: src/get_center.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/get_center.f90 -o obj/get_center.o 
+
+obj/get_consensus.o: src/get_consensus.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/get_consensus.f90 -o obj/get_consensus.o 
+
+obj/get_vvv.o: src/get_vvv.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/get_vvv.f90 -o obj/get_vvv.o 
+
+obj/initial_move.o: src/initial_move.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/initial_move.f90 -o obj/initial_move.o 
+
+obj/LOOK.o: src/LOOK.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/LOOK.f90 -o obj/LOOK.o 
+
+obj/mcheck.o: src/mcheck.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/mcheck.f90 -o obj/mcheck.o 
+
+obj/metro.o: src/metro.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/metro.f90 -o obj/metro.o 
+
+obj/metro_swap.o: src/metro_swap.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/metro_swap.f90 -o obj/metro_swap.o 
+
+obj/mods.o: src/mods.f90 
+	$(FC) -c $(OPTS) $(MOD) src/mods.f90 -o obj/mods.o 
+
+obj/move2.o: src/move2.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move2.f90 -o obj/move2.o 
+
+obj/move3d.o: src/move3d.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move3d.f90 -o obj/move3d.o 
+
+obj/move3s.o: src/move3s.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move3s.f90 -o obj/move3s.o 
+
+obj/move4d.o: src/move4d.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move4d.f90 -o obj/move4d.o 
+
+obj/move4s.o: src/move4s.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move4s.f90 -o obj/move4s.o 
+
+obj/move5d.o: src/move5d.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move5d.f90 -o obj/move5d.o 
+
+obj/move5s.o: src/move5s.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move5s.f90 -o obj/move5s.o 
+
+obj/move6.o: src/move6.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move6.f90 -o obj/move6.o 
+
+obj/move7a.o: src/move7a.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move7a.f90 -o obj/move7a.o 
+
+obj/move7b.o: src/move7b.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move7b.f90 -o obj/move7b.o 
+
+obj/move8.o: src/move8.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move8.f90 -o obj/move8.o 
+
+obj/move9.o: src/move9.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move9.f90 -o obj/move9.o 
+
+obj/move_c_end.o: src/move_c_end.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move_c_end.f90 -o obj/move_c_end.o 
+
+obj/move_n_end.o: src/move_n_end.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move_n_end.f90 -o obj/move_n_end.o 
+
+obj/move_point.o: src/move_point.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/move_point.f90 -o obj/move_point.o 
+
+obj/prepare_beta.o: src/prepare_beta.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/prepare_beta.f90 -o obj/prepare_beta.o 
+
+obj/prepare_frg.o: src/prepare_frg.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/prepare_frg.f90 -o obj/prepare_frg.o 
+
+obj/prepare_move2.o: src/prepare_move2.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/prepare_move2.f90 -o obj/prepare_move2.o 
+
+obj/prepare_move3.o: src/prepare_move3.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/prepare_move3.f90 -o obj/prepare_move3.o 
+
+obj/prepare_neighbors.o: src/prepare_neighbors.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/prepare_neighbors.f90 -o obj/prepare_neighbors.o 
+
+obj/prepare_vectors.o: src/prepare_vectors.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/prepare_vectors.f90 -o obj/prepare_vectors.o 
+
+obj/random_initial.o: src/random_initial.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/random_initial.f90 -o obj/random_initial.o 
+
+obj/read_CAcontact.o: src/read_CAcontact.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_CAcontact.f90 -o obj/read_CAcontact.o 
+
+obj/read_CAcontact8.o: src/read_CAcontact8.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_CAcontact8.f90 -o obj/read_CAcontact8.o 
+
+obj/read_concut.o: src/read_concut.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_concut.f90 -o obj/read_concut.o 
+
+obj/read_contactrestrain.o: src/read_contactrestrain.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_contactrestrain.f90 -o obj/read_contactrestrain.o 
+
+obj/read_distantrestrain.o: src/read_distantrestrain.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_distantrestrain.f90 -o obj/read_distantrestrain.o 
+
+obj/read_E13.o: src/read_E13.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_E13.f90 -o obj/read_E13.o 
+
+obj/read_E14.o: src/read_E14.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_E14.f90 -o obj/read_E14.o 
+
+obj/read_E15.o: src/read_E15.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_E15.f90 -o obj/read_E15.o 
+
+obj/read_exp.o: src/read_exp.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_exp.f90 -o obj/read_exp.o 
+
+obj/read_initial.o: src/read_initial.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_initial.f90 -o obj/read_initial.o 
+
+obj/read_longdistantrestrain.o: src/read_longdistantrestrain.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_longdistantrestrain.f90 -o obj/read_longdistantrestrain.o 
+
+obj/read_par.o: src/read_par.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_par.f90 -o obj/read_par.o 
+
+obj/read_profile.o: src/read_profile.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_profile.f90 -o obj/read_profile.o 
+
+obj/read_quarsi3.o: src/read_quarsi3.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_quarsi3.f90 -o obj/read_quarsi3.o 
+
+obj/read_seq.o: src/read_seq.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_seq.f90 -o obj/read_seq.o 
+
+obj/read_seqcontact.o: src/read_seqcontact.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/read_seqcontact.f90 -o obj/read_seqcontact.o 
+
+obj/reset_temperature.o: src/reset_temperature.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/reset_temperature.f90 -o obj/reset_temperature.o 
+
+obj/rot_M.o: src/rot_M.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/rot_M.f90 -o obj/rot_M.o 
+
+obj/secondary.o: src/secondary.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/secondary.f90 -o obj/secondary.o 
+
+obj/set_common.o: src/set_common.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/set_common.f90 -o obj/set_common.o 
+
+obj/set_current.o: src/set_current.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/set_current.f90 -o obj/set_current.o 
+
+obj/set_current_RS.o: src/set_current_RS.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/set_current_RS.f90 -o obj/set_current_RS.o 
+
+obj/set_EHB.o: src/set_EHB.f90 obj/mods.o
+	$(FC) -c $(OPTS) $(MOD) src/set_EHB.f90 -o obj/set_EHB.o 
+
+obj/set_move_retio.o: src/set_move_retio.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/set_move_retio.f90 -o obj/set_move_retio.o 
+
+obj/set_temperature.o: src/set_temperature.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/set_temperature.f90 -o obj/set_temperature.o 
+
+obj/sort_ras.o: src/sort_ras.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/sort_ras.f90 -o obj/sort_ras.o 
+
+obj/square2.o: src/square2.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/square2.f90 -o obj/square2.o 
+
+obj/swap.o: src/swap.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/swap.f90 -o obj/swap.o 
+
+obj/swap_RS.o: src/swap_RS.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/swap_RS.f90 -o obj/swap_RS.o 
+
+obj/tasser.o: src/tasser.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/tasser.f90 -o obj/tasser.o 
+
+obj/template_initial.o: src/template_initial.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/template_initial.f90 -o obj/template_initial.o 
+
+obj/template_simulation.o: src/template_simulation.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/template_simulation.f90 -o obj/template_simulation.o 
+
+obj/test_neighbor.o: src/test_neighbor.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/test_neighbor.f90 -o obj/test_neighbor.o 
+
+obj/test_overlap.o: src/test_overlap.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/test_overlap.f90 -o obj/test_overlap.o 
+
+obj/tran_C.o: src/tran_C.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/tran_C.f90 -o obj/tran_C.o 
+
+obj/tran_M.o: src/tran_M.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/tran_M.f90 -o obj/tran_M.o 
+
+obj/tran_N.o: src/tran_N.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/tran_N.f90 -o obj/tran_N.o 
+
+obj/triangle.o: src/triangle.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/triangle.f90 -o obj/triangle.o 
+
+obj/trot_C.o: src/trot_C.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/trot_C.f90 -o obj/trot_C.o 
+
+obj/trot_M.o: src/trot_M.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/trot_M.f90 -o obj/trot_M.o 
+
+obj/trot_N.o: src/trot_N.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/trot_N.f90 -o obj/trot_N.o 
+
+obj/u3b.o: src/u3b.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/u3b.f90 -o obj/u3b.o 
+
+obj/weight12.o: src/weight12.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/weight12.f90 -o obj/weight12.o 
+
+obj/write_parameter.o: src/write_parameter.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/write_parameter.f90 -o obj/write_parameter.o 
+
+obj/zyrmsd.o: src/zyrmsd.f90 obj/mods.o 
+	$(FC) -c $(OPTS) $(MOD) src/zyrmsd.f90 -o obj/zyrmsd.o 
+
+clean: 
+	rm -f $(OBJS) module/* cas

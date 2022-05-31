@@ -1,0 +1,57 @@
+
+Your setting for running I-TASSER is:
+-pkgdir    = /home/maccarth/I-TASSER5.1
+-libdir    = /home/maccarth/I-TASSER5.1/ITLIB
+-java_home = /usr
+-seqname   = seq.fasta
+-datadir   = /home/maccarth/I-TASSER5.1/BenchmarkD200setsHard60
+-outdir    = /home/maccarth/I-TASSER5.1/BenchmarkD200setsHard60
+-runstyle  = gnuparallel
+-homoflag  = real
+-idcut     = 1
+-ntemp     = 20
+-nmodel    = 5
+-light     = false
+-hours     = 50
+-LBS       = false
+-EC        = false
+-GO        = false
+
+1. make seq.txt and rmsinp
+Your protein contains 51 residues:
+> seq.fasta
+MEQAPEDQGPQREPYNDWTLELLEELKNEAVRHFPRIWLHSLGQHIYETYG
+2.1 run Psi-blast
+2.2 Secondary structure prediction was done before.
+2.3 Predict solvent accessibility...
+2.4 run pairmod
+pair exist
+3.1 do threading
+/home/maccarth/I-TASSER5.1/BenchmarkD200setsHard60/init.PPAS exists
+/home/maccarth/I-TASSER5.1/BenchmarkD200setsHard60/init.dPPAS exists
+/home/maccarth/I-TASSER5.1/BenchmarkD200setsHard60/init.dPPAS2 exists
+/home/maccarth/I-TASSER5.1/BenchmarkD200setsHard60/init.Env-PPAS exists
+/home/maccarth/I-TASSER5.1/BenchmarkD200setsHard60/init.MUSTER exists
+/home/maccarth/I-TASSER5.1/BenchmarkD200setsHard60/init.wPPAS exists
+/home/maccarth/I-TASSER5.1/BenchmarkD200setsHard60/init.wdPPAS exists
+/home/maccarth/I-TASSER5.1/BenchmarkD200setsHard60/init.wMUSTER exists
+At line 92 of file pair99.f (unit = 26)
+Fortran runtime error: Cannot open file 'matrix3.comm': No such file or directory
+
+Error termination. Backtrace:
+#0  0x2af06221dd54 in already_open
+	at ../.././libgfortran/io/open.c:704
+#1  0x402e9e in ???
+#2  0x400d9c in ???
+#3  0x2af062be43d4 in ???
+#4  0x400dc5 in ???
+#5  0xffffffffffffffff in ???
+cp: cannot stat ‘pair.3’: No such file or directory
+cp: cannot stat ‘pair.1’: No such file or directory
+3.2 make restraints
+4.1 run simulation
+5.1 do clustering
+No. of trajectory files: 62
+   8.000000       3.500000       12.00000    
+5.2 build full-atomic model
+6 Estimate local accuracy of models and B-factor

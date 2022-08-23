@@ -1,5 +1,4 @@
-# openmp_offload-ITASSER
-# OpenMP offload version of ITASSER:  
+# OpenMP offload of ITASSER:  
 I-TASSER (Iterative Threading ASSEmbly Refinement) is a hierarchical approach to protein structure prediction and structure-based function annotation. The I-TASSER suite predicts protein structures through four main steps. These include threading template identification, iterative structure assembly simulation, model selection, and refinement, and the final step being structure-based function annotation. The structure folding and reassembling stage is conducted by replica-exchange Monte Carlo simulations. For details on I-TASSER for protein structure prediction, please refer to https://zhanggroup.org/I-TASSER/
 The OpenMP offload version of I-TASSER uses OpenMP to offload replica-exchange Monte Carlo regions of the I-TASSER pipeline to the device for optimal performance. 
 Please follow these steps to compile and run OpenMP offload version of ITASSER: 

@@ -1,7 +1,7 @@
       FUNCTION EHB(jjjj,kkkk,ISTAT)
       use params
       use chainm
-      use openacc
+!      !use openacc
       use chain1
       use echain1 
       use short1
@@ -63,8 +63,6 @@ c     included - thus expanded range
       if(jj.lt.1)jj=1
       kk=kkkk+1
       if(kk.gt.Lch)kk=Lch
-      ICNT1=ICNT
-      SUMCNT1=SUMCNT
 c^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 *****************************************************************

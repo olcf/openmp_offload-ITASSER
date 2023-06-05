@@ -6230,7 +6230,7 @@ c ^^^^^^^^^^ Look finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       FUNCTION EHB(jjjj,kkkk,ISTAT)
 	use params
       use chainm
-      use openacc
+      !use openacc
       use chain1
       use echain1 
       use short1
@@ -7547,7 +7547,7 @@ c ^^^^^^^^^^ E_short finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       END
       subroutine move2
       use params
-      use openacc 
+      !!use openacc
       use chainm
       use chain1
       use echain1
@@ -7737,7 +7737,7 @@ c ^^^^^^^^^^^^^^^^^ move2 finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       end
       subroutine move3s
       use params
-      use openacc
+      !use openacc
       use chainm
       use chain1
       use echain1
@@ -7947,7 +7947,7 @@ c ^^^^^^^^^^^^^^^^^ move3s finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       end
       subroutine move3d
 	use params
-      use openacc
+      !use openacc
       use chainm
       use chain1
       use echain1
@@ -8169,7 +8169,7 @@ c ^^^^^^^^^^^^^^^^^ move3d finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       end
       subroutine move4s
 	use params
-      use openacc
+      !use openacc
       use chainm
       use chain1
       use echain1
@@ -9805,7 +9805,7 @@ c ^^^^^^^^^^^^^^^^^ tran_N finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       end
       subroutine trot_N
       use params
-      use openacc
+      !use openacc
       use chainm
       use chain1
       use echain1
@@ -10191,7 +10191,7 @@ c ^^^^^^^^^^^^^^^^^ trot_N finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       subroutine defo_N
 	use params
       use chainm
-      use openacc
+      !use openacc
       use chain1
       use echain1
       use lengths
@@ -11986,7 +11986,7 @@ c ^^^^^^^^^^^^^^^^^ trot_M finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       subroutine defo_M
 	use params
       use chainm
-      use openacc
+      !use openacc
       use chain1
       use echain1
       use lengths
@@ -12843,7 +12843,7 @@ c ^^^^^^^^^^^^^^^^^ tran_C finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       end
       subroutine trot_C
       use params
-      use openacc
+      !use openacc
       use chainm
       use chain1
       use echain1
@@ -13222,7 +13222,7 @@ c ^^^^^^^^^^^^^^^^^ rot_C finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       subroutine defo_C
 	use params
       use chainm
-      use openacc
+      !use openacc
       use chain1
       use echain1
       use lengths
@@ -14888,7 +14888,7 @@ c ^^^^^^^^^^^^^^^^^ move9 finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       end
       subroutine swap(i1,i2)
       use params
-      use openacc
+      !use openacc
       use lengths
       use trackn
       implicit integer (i-z)
@@ -14966,7 +14966,7 @@ c     w_12=wi(j)wj(i)/wi(i)wj(j) ------------->
       end
       subroutine swap_RS(i1,i2)
 	use params
-      use openacc
+      !use openacc
       use chainm
       use lengths
       implicit integer (i-z)

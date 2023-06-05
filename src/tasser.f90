@@ -1,6 +1,6 @@
       program TASSER
       use params
-      use openacc
+      !use openacc
       use backup2
       use hb
       use sizea
@@ -51,7 +51,7 @@
 !      common/bisec/cax(nvec,nvec),cay(nvec,nvec),caz(nvec,nvec)
 !      common/hb/hbx(nvec,nvec),hby(nvec,nvec),hbz(nvec,nvec)
       common/cutoff/cut1a,cut2a,cut3a,cut4a,cut1b,cut2b,cut3b,cut4b
-      common/hopp/eonehw(0:19)
+!      common/hopp/eonehw(0:19)
       common/looks/exc,exc1,exc2
 !      common/hba/eh5a,Cr2a,acut_bb,acut_cc,acut_vv,acut_hh
 !      common/hbb/eh5b,Cr2b,bcut_bb,bcut_cc,bcut_vv,bcut_hh
@@ -274,8 +274,8 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       
 ***   
        call  CPU_TIME(start_datE )
-!      write(20,*)'starting time: ',fdate() !pgf77 has problem on fdate()
-       write(20,*)'starting time: ' ,start_datE   !date(dateBuf) 
+!       write(20,*)'starting time: ',fdate() !pgf77 has problem on fdate()
+       write(20,*)'starting time: ', start_datE   !date(dateBuf) 
 !      write(*,*)'starting time: ',fdate()!
 !       start_datE = cpu_time( )
        write(20,*)'starting time:' ,start_ datE
@@ -608,7 +608,8 @@ ccccccccccccccccccccccc <E>, NNa/NNt ccccccccccccccccccccccccccc
       write(20,*)'hour_real=',atime
       write(20,*)
 !      write(20,*)'ending time: ',fdate()
-      write(20,*)'ending time: ',fdate() !date(dateBuf) 
+      call  CPU_TIME(end_datR )
+      write(20,*)'ending time: ',end_datR !date(dateBuf) 
 
       write(*,*)
       write(*,*)'ncycle_max=',ncycle*n_run
@@ -618,7 +619,8 @@ ccccccccccccccccccccccc <E>, NNa/NNt ccccccccccccccccccccccccccc
       write(*,*)'hour_real=',atime
       write(*,*)
 !      write(*,*)'ending time: ',fdate()
-      write(20,*)'ending time: ',fdate() !date(dateBuf) 
+      call  CPU_TIME(end_datR )
+      write(20,*)'ending time: ',end_datR  !fdate() !date(dateBuf) 
      
       STOP
       END

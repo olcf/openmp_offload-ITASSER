@@ -1,6 +1,6 @@
       subroutine swap(i1,i2)
       use params
-      use openacc
+      !use openacc
       use lengths
       use trackn
       implicit integer (i-z)

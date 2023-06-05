@@ -22,8 +22,8 @@ c 3456789012345678901234567890123456789012345678901234567890123456789012345678
 
 
       module trackn
-         use params
-          integer n_tem(100)
+          use params
+            integer n_tem(100)
 ! !$OMP declare target(n_tem)
 !$OMP declare target(n_tem)
       end module trackn
@@ -32,7 +32,7 @@ c 3456789012345678901234567890123456789012345678901234567890123456789012345678
         
       module chainm
          use params
-         real :: mv(ndim)
+          real :: mv(ndim)
 ! !$OMP declare target(mv)
 !$OMP declare target(mv)
 ! !$OMP end declare target  
@@ -124,7 +124,7 @@ c 3456789012345678901234567890123456789012345678901234567890123456789012345678
       end module hba
 
       module lengths
-          integer Lch, Lch1, Lch2
+           integer :: Lch, Lch1, Lch2
 !$OMP declare target(Lch,Lch1,Lch2)
       end module lengths
 
@@ -327,9 +327,20 @@ c Merge CAcontact, CA8
       module one
         use lengths
              integer acrit
-             real :: eoinp(0:19,0:100),eonekd(0:19),contt,es2,es1
+             real :: eoinp(0:19,0:100),contt,es2,es1,eonekd(0:19)
+             real :: eonehw(0:19)
+         
+       DATA eonekd /-0.4, 1.8, -0.8, 2.5, 4.2, -0.7, 4.5, -1.6, 1.9
+     $             , -3.5, -3.5, 3.8, -3.9, -3.5, -3.5, -4.5, -3.2, 2.8
+     $             , -1.3, -0.9/
+c            ^          ^     ^     !contradict with 'centro.comm'
+c     read hydrophilic potential for Sg, positive for hydrophilic
+c     residue--->
+       DATA eonehw /0.0, -0.5, 0.3, -1.0, -1.5, -0.4, -1.8, 0.0, -1.3
+     $             , 3.0, 0.2, -1.8, 3.0, 3.0, 0.2, 3.0, -0.5, -2.5
+     $             , -2.3, -3.4 /
              ! real, PRIVATE :: eonekd(0:19)
-!$OMP declare target(acrit,contt,eoinp,es2,es1,eonekd)
+!$OMP declare target(acrit,contt,eoinp,es2,es1,eonekd,eonehw)
 cccccccccccccccccccccc read centrosymmetric potential
 cccccccccccccccccccc
 c     eonekd(A) controls centrosymmetric potential of C_g.
@@ -342,7 +353,7 @@ c     eonekd(A) controls centrosymmetric potential of C_g.
       character*3 NAME
 !      common/one/acrit,contt,eonekd(0:19),eoinp(0:19,0:100),es2,es1
 !      common/lengths/Lch,Lch1,Lch2
-      common/hopp/eonehw(0:19)
+!      common/hopp/eonehw(0:19)
 
 c     read hydrophobic potential for Sg, positive for hydrophobic
 c     residue--->
@@ -351,14 +362,15 @@ c     residue--->
 !     &     -3.9, -3.5, -3.5, -4.5,
 !     &     -3.2, 2.8, -1.3, -0.9/
 
-!       data eonekd/-0.4,1.8,-0.8,2.5,4.2,-0.7,4.5,-1.6,1.9,-3.5,-3.5,3.8,-3.9,-3.5,-3.5,-4.5,-3.2,2.8,-1.3,-0.9/
+!       DATA eonekd /-0.4, 1.8, -0.8, 2.5, 4.2, -0.7, 4.5, -1.6, 1.9 
+!     $             ,-3.5, -3.5, 3.8, -3.9, -3.5, -3.5, -4.5, -3.2, 2.8
+!     $             ,-1.3, -0.9/
 c            ^          ^     ^     !contradict with 'centro.comm'
 c     read hydrophilic potential for Sg, positive for hydrophilic
 c     residue--->
-      data eonehw /0.0, -0.5, 0.3, -1.0, -1.5, -0.4, -1.8,
-     &     0.0, -1.3, 3.0, 0.2, -1.8,
-     &     3.0, 3.0, 0.2, 3.0,
-     &     -0.5, -2.5, -2.3, -3.4/
+!      DATA eonehw /0.0, -0.5, 0.3, -1.0, -1.5, -0.4, -1.8, 0.0, -1.3 
+!     $            ,3.0, 0.2, -1.8, 3.0, 3.0, 0.2, 3.0, -0.5, -2.5
+!     $            ,-2.3, -3.4 /
 
 c     expected gyration radius:
       acrit=2.2*exp(0.38*alog(float(Lch)))/0.87 !gyrat-radius~2.2*l^0.38

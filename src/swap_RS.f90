@@ -1,6 +1,6 @@
       subroutine swap_RS(i1,i2)
 	use params
-      use openacc
+      !use openacc
       use chainm
       use lengths
       implicit integer (i-z)

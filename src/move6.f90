@@ -1,7 +1,7 @@
       subroutine move6
       use params
       use backup2
-      use openacc
+      !use openacc
       use chainm
       use chain1
       use echain1

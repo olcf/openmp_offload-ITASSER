@@ -671,7 +671,7 @@ c^^^^^^^^^^^^^^^^^ read centersymmetric potential finished ^^^^^^^^^^^
 !      common/fr/frga(ndim),frgb(ndim)
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
 !      COMMON/RCN/Mdis(ndim),kdis(ndim,100),dist(ndim,100),dev(ndim,100)
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      COMMON/short2/ codevsum, didevsum, csr(ndim,2)
 !      common/shortcom/eh3,es4,es5,es6,es7,es7a,es7b,es7c
 !      common/sg/gx(nvec,nvec,0:19),gy(nvec,nvec,0:19),gz(nvec,nvec,0:19)
@@ -1254,7 +1254,7 @@ ccccccc=======================================================cccccccccc
       character*80 line
       common/movename/mname(100)
       common/frozen/L_cut,d_xyz0,d_xyz00(ndim),angle0,angle00(ndim)
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/distres/er4,es3c
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
       common/zscore/izscore
@@ -2165,7 +2165,7 @@ c^^^^^^^^^^^^^^^^^^ read contact restrains finished ^^^^^^^^^^^^^^^^^
 !      parameter(ndim=1500)
 !      parameter(nvec=416)
 !      COMMON/RCN/Mdis(ndim),kdis(ndim,100),dist(ndim,100),dev(ndim,100)
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/lengths/Lch,Lch1,Lch2
       common/lim/colim,dilim,coold,conew,diold,dinew,didev,codev
 !      common/distres/er4,es3c
@@ -2691,7 +2691,7 @@ c^^^^^^^^^^^^^^^^^^ read CAcontact restrains finished ^^^^^^^^^^^^^^^^^
 !      common/lengths/Lch,Lch1,Lch2
       common/resnumber/Ncom,Ndis,accur
       common/commonuse2/atemp1,atemp2,N_rep,phot
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/distres/er4,es3c
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
       real r_dis,r_con,r_dev,T10,T20,T1a,T2a
@@ -3839,7 +3839,7 @@ c^^^^^^^^^^^^ initial chains finished ^^^^^^^^^^^^^^^^^^^^^
 !      common/seqe/seq(ndim),sec(ndim)
       common/looks/exc,exc1,exc2
 
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/distres/er4,es3c
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
 
@@ -5721,7 +5721,7 @@ ccccccccccccccccccccccc<E>, NNa/NNt ccccccccccccccccccccccccccc
 !      common/lengths/Lch,Lch1,Lch2
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
 !      COMMON/RCN/Mdis(ndim),kdis(ndim,100),dist(ndim,100),dev(ndim,100)
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/order/acorder,en2,sumct,sumcto,icnt,icnto,dord,en3
 !      common/distres/er4,es3c
       common/resnumber/Ncom,Ndis,accur
@@ -6677,7 +6677,7 @@ C FIX afs
 !      common/shape/amx,amy,amz,afs(ndim),afsn(ndim)
 c      COMMON/short2/ codevsum, didevsum, csr(ndim,2)
       common/three/angle(nvec,nvec)
-c      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+c      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
       common/lim/colim,dilim,coold,conew,diold,dinew,didev,codev
       common/msichores/msicho
       common/eshortenergy1/ESHORT1,ESHORT2,ESHORT3,ESHORT4,ESHORT11
@@ -15158,7 +15158,7 @@ c^^^^^^^^^^^^^^^^^ swap_RS finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 !      COMMON/ENERGY/EH5,ES3,ES3a,ES3b,EH1,EH1a,EH4,EHBIJ(ndim,ndim)
 !      common/pair1/eh2,eh1b,eh1c
 !      common/shortcom/eh3,es4,es5,es6,es7,es7a,es7b,es7c
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
       common/otherenergy/E_cord,E_cnum
 

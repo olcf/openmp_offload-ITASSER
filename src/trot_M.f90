@@ -210,7 +210,7 @@ c     backup old path ------------>
       oy(n1)=y(n1)
       oz(n1)=z(n1)
 !$acc kernels async(2)
-!$OMP target teams distribute parallel do num_teams(1) nowait
+!$OMP target teams distribute parallel do num_teams(1) !nowait
       do i=m2,n2
          ex_o(i)=ex(i)          !CA
          ey_o(i)=ey(i)
@@ -243,7 +243,7 @@ c     prepare the new path------------>
       ny(n1)=y(n)-vy(nn(n1))
       nz(n1)=z(n)-vz(nn(n1))
 !$acc kernels async(2)
-!$OMP target teams distribute parallel do num_teams(80) nowait
+!$OMP target teams distribute parallel do num_teams(80) !nowait
       do i=m2,n2
         ex_n(i)=ax0+ax+(ex(i)-ax)*a11+(ey(i)-ay)*a12+(ez(i)-az)*a13 !CA
         ey_n(i)=ay0+ay+(ex(i)-ax)*a21+(ey(i)-ay)*a22+(ez(i)-az)*a23

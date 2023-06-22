@@ -422,7 +422,7 @@ c^^^^^^^^^^^^^^^^^ read centersymmetric potential finished ^^^^^^^^^^^
 !      common/fr/frga(ndim),frgb(ndim)
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
 !      COMMON/RCN/Mdis(ndim),kdis(ndim,100),dist(ndim,100),dev(ndim,100)
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      COMMON/short2/ codevsum, didevsum, csr(ndim,2)
 !      common/shortcom/eh3,es4,es5,es6,es7,es7a,es7b,es7c
 !      common/sg/gx(nvec,nvec,0:19),gy(nvec,nvec,0:19),gz(nvec,nvec,0:19)
@@ -1005,7 +1005,7 @@ ccccccc=======================================================cccccccccc
       character*80 line
       common/movename/mname(100)
       common/frozen/L_cut,d_xyz0,d_xyz00(ndim),angle0,angle00(ndim)
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/distres/er4,es3c
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
       common/zscore/izscore
@@ -1916,7 +1916,7 @@ c^^^^^^^^^^^^^^^^^^ read contact restrains finished ^^^^^^^^^^^^^^^^^
 !      parameter(ndim=1500)
 !      parameter(nvec=416)
 !      COMMON/RCN/Mdis(ndim),kdis(ndim,100),dist(ndim,100),dev(ndim,100)
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/lengths/Lch,Lch1,Lch2
       common/lim/colim,dilim,coold,conew,diold,dinew,didev,codev
 !      common/distres/er4,es3c
@@ -2442,7 +2442,7 @@ c^^^^^^^^^^^^^^^^^^ read CAcontact restrains finished ^^^^^^^^^^^^^^^^^
 !      common/lengths/Lch,Lch1,Lch2
       common/resnumber/Ncom,Ndis,accur
       common/commonuse2/atemp1,atemp2,N_rep,phot
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/distres/er4,es3c
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
       real r_dis,r_con,r_dev,T10,T20,T1a,T2a

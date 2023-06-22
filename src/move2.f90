@@ -97,7 +97,7 @@ c     calculate E_new--------------->
 
 ! !$OMP target enter data map(tofrom:nomm(:),nop(:),nopp(:),noaa(:),nom(:),noa(:))
 ! !$OMP target enter data map(to: nomm, nop, nopp, noaa, nom, noa)
-!$OMP target teams distribute parallel do simd num_teams(1) nowait
+!$OMP target teams distribute parallel do simd num_teams(1) !nowait
 !$OMP&  map(to: nomm, nop, nopp, noaa, nom, noa)
 ! !$acc loop gang(1024)
          do pp=1,Lch
@@ -130,7 +130,7 @@ c     return back the conformation and calculate E_old --------->
 c     calculate eprofn while dord was calculated when call EHB(m,m2,1)--->
          eprofn=0.0
 !// !$acc kernels loop gang async(2) !gang I just took out
-!$OMP target teams distribute parallel do simd num_teams(1) nowait
+!$OMP target teams distribute parallel do simd num_teams(1) !nowait
 !$OMP&  map(to: nomm, nop, seq, noaa, nom, envir, noa) 
          do pp=1,Lch
             is=seq(pp)          

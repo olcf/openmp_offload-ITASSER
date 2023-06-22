@@ -113,7 +113,8 @@ c 3456789012345678901234567890123456789012345678901234567890123456789012345678
 
       module RES
         use params 
-        integer ER3,er5,er6,er7,Mcom(ndim)
+        real ::  ER3,er5,er6,er7
+        integer :: Mcom(ndim)
         real :: Kcom(ndim,100)
 !$OMP declare target(ER3,er5,er6,er7,Mcom,Kcom)
       end module RES 
@@ -327,7 +328,7 @@ c Merge CAcontact, CA8
       module one
         use lengths
              integer acrit
-             real :: eoinp(0:19,0:100),contt,es2,es1,eonekd(0:19)
+             real :: eoinp(0:19,0:100),es1,es2,contt,eonekd(0:19)
              real :: eonehw(0:19)
          
        DATA eonekd /-0.4, 1.8, -0.8, 2.5, 4.2, -0.7, 4.5, -1.6, 1.9

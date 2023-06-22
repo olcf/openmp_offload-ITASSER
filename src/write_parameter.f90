@@ -15,7 +15,7 @@
 !      common/lengths/Lch,Lch1,Lch2
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
 !      COMMON/RCN/Mdis(ndim),kdis(ndim,100),dist(ndim,100),dev(ndim,100)
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/order/acorder,en2,sumct,sumcto,icnt,icnto,dord,en3
 !      common/distres/er4,es3c
       common/resnumber/Ncom,Ndis,accur

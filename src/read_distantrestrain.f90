@@ -7,7 +7,7 @@
 !      parameter(ndim=1500)
 !      parameter(nvec=416)
 !      COMMON/RCN/Mdis(ndim),kdis(ndim,100),dist(ndim,100),dev(ndim,100)
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/lengths/Lch,Lch1,Lch2
       common/lim/colim,dilim,coold,conew,diold,dinew,didev,codev
 !      common/distres/er4,es3c

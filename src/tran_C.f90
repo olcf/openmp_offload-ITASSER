@@ -134,9 +134,9 @@ c     backup old path ------------>
       oy(m1)=y(m1)
       oz(m1)=z(m1)
 !$acc kernels 
-!$OMP target teams distribute parallel do simd nowait
-!$OMP& map(to:ex,ey,ez,egx,egy,egz,ecx,ecy,ecz,ebx,eby,ebz,etx,ety,etz)
-!$OMP& map(from: ex_o,ey_o,ez_o,egx_o,egy_o,egz_o,ecx_o,ecy_o,
+!$OMP target teams distribute parallel do simd !nowait
+!$OMP& map(to:ex,ey,ez,egx,egy,egz,ecx,ecy,ecz,ebx,eby,ebz,etx,ety,etz) 
+!$OMP& map(from:ex_o,ey_o,ez_o,egx_o,egy_o,egz_o,ecx_o,ecy_o,
 !$OMP& ecz_o,ebx_o,eby_o,ebz_o,etx_o,ety_o,etz_o)
       do i=m2,Lch
          ex_o(i)=ex(i)          !CA

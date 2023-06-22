@@ -3,9 +3,7 @@
       contains
 
       function ei5(i,idist)
-	use params
-!$acc routine seq
-!$OMP declare target 
+      use params
       use lengths
       use short1
       use chainm
@@ -18,7 +16,8 @@
       real :: axp, ayp, azp
       real :: ei5
       integer :: xxx
-
+!$acc routine seq
+!$OMP declare target
       ei5=0
       if(idist.gt.5)then
          im2=i-2

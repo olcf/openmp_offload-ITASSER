@@ -1,17 +1,17 @@
-	module aay_mod
+        module aay_mod
 
-      contains
+        contains
 
-      function aay(i)
-	use params
+        function aay(i)
+        use params
+        use chainm
+        use chain1
+        use echain1
 !$acc routine seq
+        implicit none
+        integer, value :: i
+        real :: aay
 !$OMP declare target 
-      use chainm
-      use chain1
-      use echain1
-      implicit none
-      integer, value :: i
-      real :: aay
 
       if(mv(i).gt.0)then
          aay=y(i)

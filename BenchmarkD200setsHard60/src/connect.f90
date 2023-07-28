@@ -1,5 +1,5 @@
       subroutine connect(i1,i2,pass)
-	use params
+      use params
       use lengths
       implicit integer(i-z)
 !      parameter(ndim=1500)
@@ -11,7 +11,11 @@
       bdis0=3.5
       amcheck_dis=3.1            !3.1*0.87=2.7
       pass=1
+!!$OMP target update to( i1 )      
+! !$OMP target update to(i1, i2, pass) 
+! !$OMP target update to(i2, i1, pass) !, pass)
       if(i1.eq.1)then           !!!!!N-terminal or whole structure, random walk
+! !$OMP target update to(i2, pass)
          do i=i2,1,-1
             n_check=0
  10         call get_bond(axx,ayy,azz,3.8)

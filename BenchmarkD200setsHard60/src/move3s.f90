@@ -1,6 +1,6 @@
       subroutine move3s
       use params
-      use openacc
+!      !use openacc
       use chainm
       use backup2
       use chain1

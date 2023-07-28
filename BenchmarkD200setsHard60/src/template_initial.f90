@@ -32,7 +32,7 @@
 !      common/seqe/seq(ndim),sec(ndim)
       common/looks/exc,exc1,exc2
 
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/distres/er4,es3c
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
 

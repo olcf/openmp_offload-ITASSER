@@ -41,7 +41,7 @@ C FIX afs
 !      common/shape/amx,amy,amz,afs(ndim),afsn(ndim)
 c      COMMON/short2/ codevsum, didevsum, csr(ndim,2)
       common/three/angle(nvec,nvec)
-c      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+c      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
       common/lim/colim,dilim,coold,conew,diold,dinew,didev,codev
       common/msichores/msicho
       common/eshortenergy1/ESHORT1,ESHORT2,ESHORT3,ESHORT4,ESHORT11

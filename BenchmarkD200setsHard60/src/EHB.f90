@@ -1,7 +1,7 @@
       FUNCTION EHB(jjjj,kkkk,ISTAT)
       use params
       use chainm
-      use openacc
+!      !use openacc
       use chain1
       use echain1 
       use short1
@@ -37,9 +37,11 @@
       use ei5_mod
       use energyHBa_mod
       use energyHBb_mod
-!      use omp_lib
-     
+      use omp_lib
+      use iso_fortran_env 
+
       IMPLICIT INTEGER(I-Z)
+      real(real64) :: ehbTs,ehbTe,ehbT
       EHB1=0                    !+1/r of Ca-SC
       EHB1a=0                   !+1/r for non-parallel contact of Ca-Ca
       EHB1b=0                   !excluded volume of SC-SC 
@@ -63,8 +65,6 @@ c     included - thus expanded range
       if(jj.lt.1)jj=1
       kk=kkkk+1
       if(kk.gt.Lch)kk=Lch
-      ICNT1=ICNT
-      SUMCNT1=SUMCNT
 c^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 *****************************************************************
@@ -72,13 +72,18 @@ c^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 *****************************************************************
 ! !$acc data copy (ehb4,ehb5a,ehb5b,ehb3,ehb2,
 ! !$acc&              ehb1c,ehb1b,ehb1a,ehb1,SUMCT1,ICNT1)
-!!$OMP target teams distribute parallel do num_teams(100) nowait  !!this is the correct one 
-! !$OMP target teams distribute 
-      !!!!!!!!!! Correct Data Map 
-!!$OMP&  map(to: sec,jbin,seq,x,z,y,hbz,ez,gx,gy,gz, !enter data
+!!$OMP target enter  data   map(to: sec,jbin,seq,x,z,y,hbz,ez,gx,gy,gz)!,
 !!$OMP&  hbx,hby,arlp,cax,cay,egz,ex,ey,ecz,egx,egy,concut2,ebx,
 !!$OMP& eby,ebz,ecx,ecy,ica,caz,apa,alm,nom,arlm,apm,acops,mv,
-!!$OMP& app,alp,ala,noa,arla,apar,nop,ehb1)  
+!!$OMP& app,alp,ala,noa,arla,apar,nop,ehb1)     
+      ehbTs=omp_get_wtime()
+!//!$OMP target teams distribute parallel do num_teams(100) !nowait  !!this is the correct one 
+! !$OMP target teams distribute 
+      !!!!!!!!!! Correct Data Map 
+!//!$OMP&  map(to: sec,jbin,seq,x,z,y,hbz,ez,gx,gy,gz, !enter data
+!//!$OMP&  hbx,hby,arlp,cax,cay,egz,ex,ey,ecz,egx,egy,concut2,ebx,
+!//!$OMP& eby,ebz,ecx,ecy,ica,caz,apa,alm,nom,arlm,apm,acops,mv,
+!///!$OMP& app,alp,ala,noa,arla,apar,nop,ehb1)  
 ! Thus is correct !$acc parallel loop gang default (present) async(1) ! reduction(+:EHB1,EHB1a,EHB1b,EHB1c,EHB2,EHB3,EHB4,
 ! !$acc&                        EHB5,EHB5a,EHB5b,ICNT1,SUMCT1)
 ! !$acc&    default(present) 
@@ -88,7 +93,8 @@ c^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ! !$OMP map(to: ehb4,ehb5a,ehb5b,ehb3,ehb2)
 ! !$OMP target teams 
 ! !$OMP parallel do 
-! !$OMP target teams distribute parallel do 
+!!$OMP target teams distribute parallel do 
+!!$OMP parallel do simd private(k)      
       DO 1002 k=jj,kk
          kseq=seq(k)
          if(mv(k).gt.0)then     !moveable point
@@ -133,13 +139,15 @@ c^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 *****************************************************************
 ********************** start i-cicle ****************************
 *****************************************************************
-! !$OMP target private(i,fact,axki,ayki,azki,dist,bxi,byi,bzi,
+! !$OMP  loop bind private(i,fact,axki,ayki,azki,dist,bxi,byi,bzi,
 ! !$OMP&          axi,ayi,azi,idist)
-! !$OMP&   reduction(ICNT1,SUMCT1,EHB4,EHB1a)
+!!$OMP parallel do   reduction(ICNT1,SUMCT1,EHB4,EHB1a)
 ! !$acc& reduction(+:EHB1,EHB1a,EHB1b,EHB1c,EHB2,EHB3,EHB4,
 ! !$acc&                        EHB5,EHB5a,EHB5b,ICNT1,SUMCT1)
 ! !$OMP target 
-!  !$omp  parallel do ! private(i) !reduction(+: EHB1) 
+!!$OMP&  private(i,fact,axki,ayki,azki,dist,bxi,byi,bzi,
+!!$OMP&          axi,ayi,azi,idist)
+!!$OMP&   reduction(ICNT1,SUMCT1,EHB4,EHB1a)
          do 1001 i=1,Lch
             iend=max(k+1,kk)
             if(i.ge.k-1.and.i.le.iend)goto 1001 !to avoid repeat
@@ -219,8 +227,8 @@ c     quarsi3 for SC-SC pair, 1/r for Ca-Ca ----------------->
                      NOP(k)=NOP(k)+ISTAT
 !// !$acc atomic update
                      NOP(i)=NOP(i)+ISTAT
-                     ICNT1=ICNT1+istat*idist
-                     SUMCT1=SUMCT1+ISTAT
+                     ICNT=ICNT+istat*idist
+                     SUMCT=SUMCT+ISTAT
                      if(Gr2.gt.arlp(iseq,kseq))THEN
 !// $acc atomic update
                         EHB2=EHB2+app(i,k) !quarsi3
@@ -239,8 +247,8 @@ c     quarsi3 for SC-SC pair, 1/r for Ca-Ca ----------------->
                         NOA(k)=NOA(k)+ISTAT
 !// !$acc atomic update
                         NOA(i)=NOA(i)+ISTAT
-                        ICNT1=ICNT1+istat*idist
-                        SUMCT1=SUMCT1+ISTAT
+                        ICNT=ICNT+istat*idist
+                        SUMCT=SUMCT+ISTAT
                         if(Gr2.gt.arla(iseq,kseq))THEN
 !// !$acc atomic update
                            EHB2=EHB2+apa(i,k)
@@ -257,8 +265,8 @@ c     quarsi3 for SC-SC pair, 1/r for Ca-Ca ----------------->
                         NOM(k)=NOM(k)+ISTAT
 !// !$acc atomic update
                         NOM(i)=NOM(i)+ISTAT
-                        ICNT1=ICNT1+istat*idist !distance of pairs
-                        SUMCT1=SUMCT1+ISTAT !number of contact pairs
+                        ICNT=ICNT+istat*idist !distance of pairs
+                        SUMCT=SUMCT+ISTAT !number of contact pairs
                         if(Gr2.gt.arlm(iseq,kseq))THEN
 !// !$acc atomic update
                            EHB2=EHB2+apm(i,k)
@@ -389,15 +397,17 @@ c^^^^^^^^^^^^^H-bond energy finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ! !$acc&                        EHB5,EHB5a,EHB5b,ICNT1,SUMCT1)
 ! !$omp end target teams
  1001    continue               !i -> [1,Lch]
+!!$OMP end parallel do           
 !  !$omp end target 
 ! !$omp end target teams distribute parallel do
  1002 continue 
-! !$OMP end target teams  
-! !$omp end target teams distribute parallel do  !!this is correct
-! !$OMP target exit data   map(from: sec,jbin,seq,x,z,y,hbz,ez,gx,gy,gz,
-! !$OMP&  hbx,hby,arlp,cax,cay,egz,ex,ey,ecz,egx,egy,concut2,ebx,
-! !$OMP& eby,ebz,ecx,ecy,ica,caz,apa,alm,nom,arlm,apm,acops,mv,
-! !$OMP& app,alp,ala,noa,arla,apar,nop,ehb1)
+!!$OMP end parallel do 
+!//!$omp end target teams distribute parallel do  !!this is correct
+        ehbTe=omp_get_wtime()
+!!$OMP target exit data   map(from: sec,jbin,seq,x,z,y,hbz,ez,gx,gy,gz)!,
+!!$OMP&  hbx,hby,arlp,cax,cay,egz,ex,ey,ecz,egx,egy,concut2,ebx,
+!!$OMP& eby,ebz,ecx,ecy,ica,caz,apa,alm,nom,arlm,apm,acops,mv,
+!!$OMP& app,alp,ala,noa,arla,apar,nop,ehb1)
 !$acc wait(1)
 ! !$omp end target teams 
 ! this 1!$acc end data
@@ -407,14 +417,13 @@ c     ICNTO/SUMCTO are not changed when call Eold
 ! !$acc update host(EHB1,EHB1a,EHB1b,EHB1c,EHB2,EHB3,EHB4,
 ! !$acc&                        EHB5,EHB5a,EHB5b,ICNT1,SUMCT1)
       if(istat.lt.0) then       !Eold
-         b=abs(ICNT1/(0.000001+float(SUMCT1))-acorder)
+         b=abs(ICNT/(0.000001+float(SUMCT))-acorder)
          a=abs(ICNTO/(0.000001+float(SUMCTO))-acorder)
-         d=abs(float(SUMCT1)-contt) !deviation of contact number on new conform
+         d=abs(float(SUMCT)-contt) !deviation of contact number on new conform
          c=abs(float(SUMCTO)-contt) !deviation of contact number on new confor
          dord=en2*(b-a)+en3*(d-c) !not included in EHB
       endif
-      ICNT = INCT1     
-      SUMCT = SUMCT1
+      
       
       EHB
      $     =eh1*EHB1            !+1/r of Ca-SC

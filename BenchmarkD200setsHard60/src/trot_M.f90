@@ -210,7 +210,15 @@ c     backup old path ------------>
       oy(n1)=y(n1)
       oz(n1)=z(n1)
 !$acc kernels async(2)
-!$OMP target teams distribute parallel do num_teams(1) nowait
+!//!$OMP target teams distribute parallel do num_teams(1) !nowait
+!!$OMP target enter data map(to: ey,ex,ez,egz,
+!!$OMP& eby,ebz,etx,ety,etz,egx,egy,ecx,ecy,
+!!$OMP& ecz,ecx,ecz,ebx)      
+!!$OMP target teams distribute parallel do num_teams(80) !!nowait
+!!$OMP& map(tofrom: ey,ex,ex_o,ez_o,ez,ey_o,ecz_o,egx_o,egz,
+!!$OMP& eby,ebx_o,ebz,eby_o,etx,egz_o,ety,etx_o,etz,ety_o,egx,egy,egy_o,ecx,ebz_o,ecy,ecx_o,
+!!$OMP& ecz,ecy_o,ecx,ebz_o,ecx_o,ecz,etz_o,ebx)    
+!!$OMP parallel do simd private(i)      
       do i=m2,n2
          ex_o(i)=ex(i)          !CA
          ey_o(i)=ey(i)
@@ -228,7 +236,8 @@ c     backup old path ------------>
          ety_o(i)=ety(i)
          etz_o(i)=etz(i)
       enddo
-!$OMP end target teams distribute parallel do
+!!$OMP end parallel do simd    
+! !$OMP end target teams distribute parallel do
 
 !$acc end kernels
 c     prepare the new path------------>
@@ -243,7 +252,11 @@ c     prepare the new path------------>
       ny(n1)=y(n)-vy(nn(n1))
       nz(n1)=z(n)-vz(nn(n1))
 !$acc kernels async(2)
-!$OMP target teams distribute parallel do num_teams(80) nowait
+! !$OMP target enter data map (to:ez,ey,ex,egx,egy,egz,etx,ety,eyz) 
+! !$OMP target enter data map(alloc:ey_n) !,ez_n)      
+!$OMP target teams distribute parallel do simd num_teams(80) !nowait 
+! !$OMP& map(to:ez,ey,ex,egx,egy,egz,etx,ety,eyz)    
+! !$OMP& map(from:ex_n,ey_n,ez_n)      
       do i=m2,n2
         ex_n(i)=ax0+ax+(ex(i)-ax)*a11+(ey(i)-ay)*a12+(ez(i)-az)*a13 !CA
         ey_n(i)=ay0+ay+(ex(i)-ax)*a21+(ey(i)-ay)*a22+(ez(i)-az)*a23
@@ -261,7 +274,13 @@ c     prepare the new path------------>
         ety_n(i)=ay0+ay+(etx(i)-ax)*a21+(ety(i)-ay)*a22+(etz(i)-az)*a23
         etz_n(i)=az0+az+(etx(i)-ax)*a31+(ety(i)-ay)*a32+(etz(i)-az)*a33
       enddo
-!$OMP end target teams distribute parallel do 
+!$OMP end target teams distribute parallel do simd 
+!!$OMP target exit data map(from: ey,ex,ez,egz,
+!!$OMP& eby,ebz,etx,ety,etz,egx,egy,ecx,ecy,
+!!$OMP& ecz,ecx,ecz,ebx)      
+!!$OMP target exit data map (delete:ey_n) !,ez_n)
+! !$OMP target exit data map (from:ez,ey,ex,egx,egy,egz,etx,ety,eyz) 
+! !$OMP target exit data map (delete:ex_n) !,ey_n,ez_n)
 !$acc end kernels
       d2=(nx(m1)-ex_n(m3))**2+(ny(m1)-ey_n(m3))**2+(nz(m1)-ez_n(m3))**2
       if((d2.lt.23.or.d2.gt.78).and.mbig.eq.0)goto 202
@@ -373,14 +392,17 @@ c     Et=E+de
             icnto=icnt
             sumcto=sumct 
 !$acc kernels async(2)
+!$OMP parallel do simd !private(pp)            
             do pp=1,Lch
                nopp(pp)=nop(pp)
                nomm(pp)=nom(pp)
                noaa(pp)=noa(pp)
             enddo
+!$OMP end parallel do simd         
             eprofo=eprofn
 
 c     change the conformation to the new position--------->
+
             do kkk=m,n
                afs(kkk)=afsn(kkk) !change ifs to the new one
             enddo

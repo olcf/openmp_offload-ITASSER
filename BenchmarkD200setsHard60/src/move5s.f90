@@ -1,7 +1,7 @@
       subroutine move5s
       use params
       use chainm
-      use openacc
+      !use openacc
       use backup2
       use chain1
       use echain1

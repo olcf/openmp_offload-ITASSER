@@ -27,7 +27,7 @@
       character*80 line
       common/movename/mname(100)
       common/frozen/L_cut,d_xyz0,d_xyz00(ndim),angle0,angle00(ndim)
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/distres/er4,es3c
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
       common/zscore/izscore

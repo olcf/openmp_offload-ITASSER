@@ -1,7 +1,7 @@
       subroutine trot_C
       use params
       use backup2
-      use openacc
+      !use openacc
       use chainm
       use chain1
       use echain1
@@ -159,10 +159,10 @@ c     backup old path ------------>
       oy(m1)=y(m1)
       oz(m1)=z(m1)
 !// !$acc kernels
-!$OMP target teams distribute parallel do num_teams(80) nowait 
-!$OMP& map(tofrom: ey,ex,ex_o,ez_o,ez,ey_o,egx,ecz_o,egy,egx_o,egz,
-!$OMP& eby,ebx_o,ebz,eby_o,etx,egz_o,ety,etx_o,etz,ety_o,egx,egy,egx_o,egy_o,ecx,ebz_o,ecy,ecx_o,
-!$OMP& ecz,ecy_o,egy_o,ecx,ebz_o,ecx_o,ecz,etz_o,ebx)
+!$OMP target teams distribute parallel do num_teams(80) !!nowait 
+!$OMP& map(tofrom: ey,ex,ex_o,ez_o,ez,ey_o,ecz_o,egx_o,egz,
+!$OMP& eby,ebx_o,ebz,eby_o,etx,egz_o,ety,etx_o,etz,ety_o,egx,egy,egy_o,ecx,ebz_o,ecy,ecx_o,
+!$OMP& ecz,ecy_o,ecx,ebz_o,ecx_o,ecz,etz_o,ebx)
       do i=m2,Lch
          ex_o(i)=ex(i)          !CA
          ey_o(i)=ey(i)

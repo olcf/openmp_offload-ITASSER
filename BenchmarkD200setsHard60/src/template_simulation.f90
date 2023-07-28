@@ -12,6 +12,9 @@
       use eigen
       use short
       use backup1
+      use omp_lib
+      use iso_fortran_env
+
       implicit integer(i-z)
 !      use chain1
 !      parameter(ndim=1500)
@@ -87,6 +90,7 @@
       common/aTTs/aTTs1,aTTs2,aTTs_rep(nrep),aTTs
       common/ranzy/nozy
       common/hours/hour_max
+      real (real64):: mvTs, mvTe, mvT,ehbTs,ehbTe,ehbT
 ! !$acc data copyout (energ_sum2(:),energ_sum(:),bnt(:)
 ! !$acc&              ,n_rmsd(:),bnna(:),bna(:),bnst(:)
 ! !$acc&               ,armsd_sum(:),bnsa(:),bnnt(:),n_sum(:))  
@@ -196,7 +200,9 @@ ccccccccccccccccccccfragment movement ccccccccccccccccccccc
                         elseif(nfr_f(ifr).eq.Lch)then
                            call trot_C !translate+rotate C-terminal
                         else
+                         mvTs=omp_get_wtime()     
                            call trot_M !translate+rotate Middle-fragment
+                         mvTe=omp_get_wtime() 
                         endif
                      elseif(switch.eq.4)then !translation
                         if(nfr_i(ifr).eq.1)then
@@ -248,7 +254,9 @@ ccc
 ccccccccccrecord energy and (x,y,z) cccccccccccccccccccccccc
             E_rep(itemp)=energy_tot() !whole energy
             if(E_rep(itemp).lt.E_min) E_min=E_rep(itemp)
-! !$acc kernels loop  private(i)
+! !$acc kernels loop  private(i)\
+! !$OMP target teams distribute parallel do
+! !$OMP parallel do simd private(i) shared(ica,x,y,z,ex,ey,ez)            
             do i=1,Lch
                icarep(i,itemp)=ica(i)
                if(mv(i).gt.0)then
@@ -273,17 +281,23 @@ ccccccccccrecord energy and (x,y,z) cccccccccccccccccccccccc
                   etzrep(i,itemp)=etz(i)
                endif
             enddo
+! !$OMP end parallel do             
+!!$OMP end target teams distribute parallel do
 ! !$acc end kernels
 c^^^^^^^^^^^^record done ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  2222    continue
 
 ccccccccccccccccc<RMSD>, <E> cccccccccccccccccccccccccc
 ! !$acc kernels loop gang private(i)
+!!$OMP target teams distribute parallel do       
+!$OMP parallel do simd           
          do i=1,N_rep
             energ_sum(i)=energ_sum(i)+E_rep(i)
             energ_sum2(i)=energ_sum2(i)+E_rep(i)*E_rep(i)
             N_sum(i)=N_sum(i)+1
          enddo
+!$OMP end parallel do simd         
+!!$OMP end target teams distribute parallel do
 ! !$acc end kernels
 !
 ccccccccccccccccccccc snapshots of E(1), E(N_rep) ccccccccccccc
@@ -383,6 +397,8 @@ ccccccccccccccccccccccc<E>, NNa/NNt ccccccccccccccccccccccccccc
       write(*,*)'hour_max=',hour_max
       write(*,*)'hour_real=',atime
       write(*,*)
+      write(*,* )'Start-Time',mvTs,mvTe,ehbTs,ehbTe
+       print '( a15, es10.3e2 )', 'Speedups      : ',ehbTe
 !!FIX      write(*,*)'ending time: ',fdate()
       
       stop

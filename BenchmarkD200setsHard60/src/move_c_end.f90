@@ -1,6 +1,6 @@
       subroutine move_c_end
 	use params
-      use openacc
+      !use openacc
       use backup2
       use chainm
       use chain1
@@ -12,6 +12,7 @@
       use shape
       use backup1
       use ehbc
+      use order
       implicit integer(i-z)
       common/logica/goodc
       logical look, goodc(nvec,nvec)
@@ -104,7 +105,7 @@ c     calculate eprofn while dord was calculated when call EHB(i,m,1)--->
          enddo
 
 c     Metropolis ------------------>
-         dE=Enew-Eold+dord+en1*(eprofn-eprofo)
+         dE=Enew-Eold +dord +en1*(eprofn-eprofo)
 c         E=energ
 c         Et=E+de
 

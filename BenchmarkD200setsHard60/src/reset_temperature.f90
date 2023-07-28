@@ -10,7 +10,7 @@
 !      common/lengths/Lch,Lch1,Lch2
       common/resnumber/Ncom,Ndis,accur
       common/commonuse2/atemp1,atemp2,N_rep,phot
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      common/distres/er4,es3c
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
       real r_dis,r_con,r_dev,T10,T20,T1a,T2a

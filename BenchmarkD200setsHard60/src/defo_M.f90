@@ -261,6 +261,7 @@ c     prepare the new path------------>
       ny(n1)=y(n)-vy(nn(n1))
       nz(n1)=z(n)-vz(nn(n1))
 !$acc kernels
+!$OMP target teams distribute parallel do simd      
       do i=m2,n_rot
          ex_n(i)=ax0+ax+(ex(i)-ax)*a11+(ey(i)-ay)*a12+(ez(i)-az)*a13 !CA
          ey_n(i)=ay0+ay+(ex(i)-ax)*a21+(ey(i)-ay)*a22+(ez(i)-az)*a23
@@ -278,6 +279,7 @@ c     prepare the new path------------>
          ety_n(i)=ay0+ay+(etx(i)-ax)*a21+(ety(i)-ay)*a22+(etz(i)-az)*a23
          etz_n(i)=az0+az+(etx(i)-ax)*a31+(ety(i)-ay)*a32+(etz(i)-az)*a33
       enddo
+!$OMP end target teams distribute parallel do simd      
       do i=n_rot+1,n2
          ex_n(i)=ax0+ax+(ex(i)-ax)*b11+(ey(i)-ay)*b12+(ez(i)-az)*b13 !CA
          ey_n(i)=ay0+ay+(ex(i)-ax)*b21+(ey(i)-ay)*b22+(ez(i)-az)*b23

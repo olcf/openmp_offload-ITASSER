@@ -41,7 +41,7 @@ C FIX afs
 !      common/shape/amx,amy,amz,afs(ndim),afsn(ndim)
 c      COMMON/short2/ codevsum, didevsum, csr(ndim,2)
       common/three/angle(nvec,nvec)
-c      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
       common/lim/colim,dilim,coold,conew,diold,dinew,didev,codev
       common/msichores/msicho
       common/eshortenergy1/ESHORT1,ESHORT2,ESHORT3,ESHORT4,ESHORT11
@@ -877,33 +877,34 @@ c             write(*,*)i,bx00(i),by00(i),bz00(i)
          ESHORT13=0
       endif
 *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      ESHORT = es2*ESHORT2 +er1*ESHORT3  +er3*ESHORT4 +er4*ESHORT4a +es3*ESHORT5 +es3a*ESHORT5a +es3b*ESHORT5b +es3c*ESHORT5c+es4*ESHORT6+es5*ESHORT7+es6*ESHORT8+er5*ESHORT9+er6*ESHORT10+er7*ESHORT11+astick*ESHORT12+ermsd*ESHORT13+er21*ESHORT21+er22*ESHORT22+er23*ESHORT23
 
-      ESHORT=
-     $     +es2*ESHORT2
-     $     +er1*ESHORT3
-     $     +er3*ESHORT4
-     $     +er4*ESHORT4a
-     $     +es3*ESHORT5
-     $     +es3a*ESHORT5a
-     $     +es3b*ESHORT5b
-     $     +es3c*ESHORT5c
-     $     +es4*ESHORT6
-     $     +es5*ESHORT7
-     $     +es6*ESHORT8
-     $     +er5*ESHORT9
-     $     +er6*ESHORT10
-     $     +er7*ESHORT11
-     $     +astick*ESHORT12
-     $     +ermsd*ESHORT13
-     $     +er21*ESHORT21
-     $     +er22*ESHORT22
-     $     +er23*ESHORT23
-
+!      ESHORT=
+!     $     +es2*ESHORT2
+!     $     +er1*ESHORT3
+!     $     +er3*ESHORT4
+!     $     +er4*ESHORT4a
+!     $     +es3*ESHORT5
+!     $     +es3a*ESHORT5a
+!     $     +es3b*ESHORT5b
+!     $     +es3c*ESHORT5c
+!     $     +es4*ESHORT6
+!     $     +es5*ESHORT7
+!     $     +es6*ESHORT8
+!     $     +er5*ESHORT9
+!     $     +er6*ESHORT10
+!     $     +er7*ESHORT11
+!     $     +astick*ESHORT12
+!     $     +ermsd*ESHORT13
+!     $     +er21*ESHORT21
+!     $     +er22*ESHORT22
+!     $     +er23*ESHORT23
+!
 c     $     +er17*ESHORT17
-      
-
-c      write(*,*)iiii,jjjj,ESHORT,ESHORT21,er21
-c     write(*,*)eshort,eshort12,astick,itemp
+!      
+!
+!c      write(*,*)iiii,jjjj,ESHORT,ESHORT21,er21
+!c     write(*,*)eshort,eshort12,astick,itemp
 
 c ^^^^^^^^^^ E_short finished ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ! ! !$acc end data

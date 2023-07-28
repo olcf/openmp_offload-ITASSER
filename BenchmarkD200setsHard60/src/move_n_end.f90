@@ -1,6 +1,6 @@
       subroutine move_n_end
 	use params
-      use openacc
+      !use openacc
       use backup2
       use chainm
       use chain1

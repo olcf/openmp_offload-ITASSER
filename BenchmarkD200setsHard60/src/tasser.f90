@@ -1,88 +1,88 @@
-      program TASSER
-      use params
-      use openacc
-      use backup2
-      use hb
-      use sizea
-      use size
-      use bisec
-      use chainm
-      use chain1
-      use echain1
-      use short1
-      use lengths
-      use ENERGY
-      use hba
-      use hbb
-      use hb
-      use pair
-      use icgg
-      use sg
-      use distres
-      use ehbenergy
-      use concutt
-      use pair1
-      use shortcom
-      use echain2
-      use echain4
-      use order
-      use echain5
-      use seqe
-      use one
-      use RCN
-      use short
-      use RES
-      use svm1
-      use svm2
-      use fr
-      use stick
-      use short
-      use shape
-      use backup1
-      use ehbc
-      use trackn 
-      implicit integer(i-z)
-      common/logica/goodc
-      logical look, goodc(nvec,nvec)
-      common/three/angle(nvec,nvec)
-!      common/lengths/Lch,Lch1,Lch2
-!      common/seqe/seq(ndim),sec(ndim)
-      common/vectors/vx(nvec),vy(nvec),vz(nvec),vector(-5:5,-5:5,-5:5)
-!      common/bisec/cax(nvec,nvec),cay(nvec,nvec),caz(nvec,nvec)
-!      common/hb/hbx(nvec,nvec),hby(nvec,nvec),hbz(nvec,nvec)
-      common/cutoff/cut1a,cut2a,cut3a,cut4a,cut1b,cut2b,cut3b,cut4b
-      common/hopp/eonehw(0:19)
-      common/looks/exc,exc1,exc2
-!      common/hba/eh5a,Cr2a,acut_bb,acut_cc,acut_vv,acut_hh
-!      common/hbb/eh5b,Cr2b,bcut_bb,bcut_cc,bcut_vv,bcut_hh
-!      common/concutt/concut(0:19,0:19),concut2(0:19,0:19),concut_sc
+              program TASSER
+              use params
+              !use openacc
+              use backup2
+              use hb
+              use sizea
+              use size
+              use bisec
+              use chainm
+              use chain1
+              use echain1
+              use short1
+              use lengths
+              use ENERGY
+              use hba
+              use hbb
+              use hb
+              use pair
+              use icgg
+              use sg
+              use distres
+              use ehbenergy
+              use concutt
+              use pair1
+              use shortcom
+              use echain2
+              use echain4
+              use order
+              use echain5
+              use seqe
+              use one
+              use RCN
+              use short
+              use RES
+              use svm1
+              use svm2
+              use fr
+              use stick
+              use short
+              use shape
+              use backup1
+              use ehbc
+              use trackn 
+              implicit integer(i-z)
+              common/logica/goodc
+              logical look, goodc(nvec,nvec)
+              common/three/angle(nvec,nvec)
+        !      common/lengths/Lch,Lch1,Lch2
+        !      common/seqe/seq(ndim),sec(ndim)
+        common/vectors/vx(nvec),vy(nvec),vz(nvec),vector(-5:5,-5:5,-5:5)
+        !      common/bisec/cax(nvec,nvec),cay(nvec,nvec),caz(nvec,nvec)
+        !      common/hb/hbx(nvec,nvec),hby(nvec,nvec),hbz(nvec,nvec)
+              common/cutoff/cut1a,cut2a,cut3a,cut4a,cut1b,cut2b,cut3b,cut4b
+        !      common/hopp/eonehw(0:19)
+              common/looks/exc,exc1,exc2
+        !      common/hba/eh5a,Cr2a,acut_bb,acut_cc,acut_vv,acut_hh
+        !      common/hbb/eh5b,Cr2b,bcut_bb,bcut_cc,bcut_vv,bcut_hh
+        !      common/concutt/concut(0:19,0:19),concut2(0:19,0:19),concut_sc
 
-      common/arandom/  aarand,abrand,acrand,adrand
-!      COMMON/ENERGY/EH5,ES3,ES3a,ES3b,EH1,EH1a,EH4,EHBIJ(ndim,ndim)
-!      COMMON/pair/ apa(ndim,ndim),app(ndim,ndim),apm(ndim,ndim)
-!      COMMON/size/ arla(0:19,0:19),arlm(0:19,0:19),arlp(0:19,0:19)
-!      COMMON/short/ IBIN(-300:300),asr(ndim,-12:12) !safe when vr^2<30
-!    COMMON/short1/ JBIN(0:500),bsr(ndim,16),acops(ndim,16)
-!      COMMON/sizea/ ala(0:19,0:19),alm(0:19,0:19),alp(0:19,0:19)
-!      common/one/acrit,contt,eonekd(0:19),eoinp(0:19,0:100),es2,es1
-!      common/shape/amx,amy,amz,afs(ndim),afsn(ndim) !  common/ehbc/envir(0:15,0:15,0:15,0:19,4),en1 !  common/backup1/NOPP(ndim),NOMM(ndim),NOAA(ndim),NHBNN(ndim)
-!      common/fr/frga(ndim),frgb(ndim)
-!      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
-!      COMMON/RCN/Mdis(ndim),kdis(ndim,100),dist(ndim,100),dev(ndim,100)
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
-!      COMMON/short2/ codevsum, didevsum, csr(ndim,2)
-!      common/shortcom/eh3,es4,es5,es6,es7,es7a,es7b,es7c
-!      common/sg/gx(nvec,nvec,0:19),gy(nvec,nvec,0:19),gz(nvec,nvec,0:19)
-      common/maxi/maxin,vect1,vect2
-!      common/ehbc/envir(0:15,0:15,0:15,0:19,4),en1
-      common/forpreparemove4/ asrr(0:19,0:19,-12:12)
-      common/lim/colim,dilim,coold,conew,diold,dinew,didev,codev    
-!      common/distres/er4,es3c
-      common/rmsdrange/nca1,nca2
-      common/CA/dx(ndim),dy(ndim),dz(ndim)
-      common/msichores/msicho
-!      common/ehbenergy/EHB1,EHB1a,EHB1b,EHB1c,EHB2,EHB3,EHB4,EHB5,EHB6
-!      common/ehbenergy1/EHB5a,EHB5b
+              common/arandom/  aarand,abrand,acrand,adrand
+        !      COMMON/ENERGY/EH5,ES3,ES3a,ES3b,EH1,EH1a,EH4,EHBIJ(ndim,ndim)
+        !      COMMON/pair/ apa(ndim,ndim),app(ndim,ndim),apm(ndim,ndim)
+        !      COMMON/size/ arla(0:19,0:19),arlm(0:19,0:19),arlp(0:19,0:19)
+        !      COMMON/short/ IBIN(-300:300),asr(ndim,-12:12) !safe when vr^2<30
+        !    COMMON/short1/ JBIN(0:500),bsr(ndim,16),acops(ndim,16)
+        !      COMMON/sizea/ ala(0:19,0:19),alm(0:19,0:19),alp(0:19,0:19)
+        !      common/one/acrit,contt,eonekd(0:19),eoinp(0:19,0:100),es2,es1
+        !      common/shape/amx,amy,amz,afs(ndim),afsn(ndim) !  common/ehbc/envir(0:15,0:15,0:15,0:19,4),en1 !  common/backup1/NOPP(ndim),NOMM(ndim),NOAA(ndim),NHBNN(ndim)
+        !      common/fr/frga(ndim),frgb(ndim)
+        !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
+        !      COMMON/RCN/Mdis(ndim),kdis(ndim,100),dist(ndim,100),dev(ndim,100)
+              COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+        !      COMMON/short2/ codevsum, didevsum, csr(ndim,2)
+        !      common/shortcom/eh3,es4,es5,es6,es7,es7a,es7b,es7c
+        !      common/sg/gx(nvec,nvec,0:19),gy(nvec,nvec,0:19),gz(nvec,nvec,0:19)
+              common/maxi/maxin,vect1,vect2
+        !      common/ehbc/envir(0:15,0:15,0:15,0:19,4),en1
+              common/forpreparemove4/ asrr(0:19,0:19,-12:12)
+              common/lim/colim,dilim,coold,conew,diold,dinew,didev,codev    
+        !      common/distres/er4,es3c
+              common/rmsdrange/nca1,nca2
+              common/CA/dx(ndim),dy(ndim),dz(ndim)
+              common/msichores/msicho
+        !      common/ehbenergy/EHB1,EHB1a,EHB1b,EHB1c,EHB2,EHB3,EHB4,EHB5,EHB6
+        !      common/ehbenergy1/EHB5a,EHB5b
       common/eshortenergy1/ESHORT1,ESHORT2,ESHORT3,ESHORT4,ESHORT11
       common/eshortenergy2/ESHORT4a,ESHORT5,ESHORT5a,ESHORT5b,ESHORT5c
       common/eshortenergy3/ESHORT6,ESHORT7,ESHORT8,ESHORT9,ESHORT10
@@ -194,7 +194,7 @@ cccc  RMSD:
       character(len=40) :: dateBuf
       data w /ndim*1.0/
 ccc   
-       real :: timeA,TimeB
+      real :: timeA,TimeB,start_datE,end_datR
 ccccccccccccccccccccccccc common input files cccccccccccccccccccccccccccccc
       open(unit=1,file='contact.comm', status='old') !cutoff of contact predi.
       open(unit=2,file='profile3.comm',status='old') !envir
@@ -273,10 +273,12 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       read(19,*) m_latt         !how many vectors
       
 ***   
-!      write(20,*)'starting time: ',fdate() !pgf77 has problem on fdate()
-       write(20,*)'starting time: ',date(dateBuf) 
-!      write(*,*)'starting time: ',fdate()
-       write(20,*)'starting time: ',date(dateBuf) 
+       call  CPU_TIME(start_datE )
+!       write(20,*)'starting time: ',fdate() !pgf77 has problem on fdate()
+       write(20,*)'starting time: ', start_datE   !date(dateBuf) 
+!      write(*,*)'starting time: ',fdate()!
+!       start_datE = cpu_time( )
+       write(20,*)'starting time:' ,start_ datE
 ***   
       
       call set_common           !set common parameters
@@ -372,6 +374,7 @@ c     call random_initial       !produce initial structure randomly.
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 ccc       The main cycle start from here !                         ccc
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+! !$OMP parallel 
       do 1111 icycle=1,ncycle
          do 2222 itemp=1,N_rep  !iterate for all the replicas
             atemp=aT_rep(itemp)	!current temperature
@@ -380,6 +383,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
             call set_current    !get current (x,y,z,ica)
             call initial_move   !update center, axis, energy
 ccc
+!!$OMP parallel do 
             do 3333 iphot=1,phot !N_swap, iterate at fixed temperature
                do 4444 i_lch=1,Lch
                   fff=aranzy(nozy)
@@ -413,6 +417,7 @@ c                     call move9
                   if(atime.gt.hour_max)goto 901
  4444          continue
  3333       continue
+!!$OMP end parallel do                   
 ccc   
 ccccccccccrecord energy and (x,y,z) cccccccccccccccccccc
             E_rep(itemp)=energy_tot() !whole energy
@@ -501,6 +506,7 @@ ccccccccccccccccc swap replicas cccccccccccccccccccccccccccccccc
           endif
           mcycle=mcycle+1
  1111 continue
+! !$OMP end parallel           
       if(i_run.lt.n_run)goto 15
  901  continue
 c--------------------------Main cycle ended here!!---------------
@@ -606,7 +612,8 @@ ccccccccccccccccccccccc <E>, NNa/NNt ccccccccccccccccccccccccccc
       write(20,*)'hour_real=',atime
       write(20,*)
 !      write(20,*)'ending time: ',fdate()
-      write(20,*)'ending time: ',date(dateBuf) 
+      call  CPU_TIME(end_datR )
+      write(20,*)'ending time: ',end_datR !date(dateBuf) 
 
       write(*,*)
       write(*,*)'ncycle_max=',ncycle*n_run
@@ -616,7 +623,8 @@ ccccccccccccccccccccccc <E>, NNa/NNt ccccccccccccccccccccccccccc
       write(*,*)'hour_real=',atime
       write(*,*)
 !      write(*,*)'ending time: ',fdate()
-      write(20,*)'ending time: ',date(dateBuf) 
+      call  CPU_TIME(end_datR )
+      write(20,*)'ending time: ',end_datR  !fdate() !date(dateBuf) 
      
       STOP
       END

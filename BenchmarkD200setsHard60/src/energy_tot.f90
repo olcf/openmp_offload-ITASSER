@@ -33,7 +33,7 @@
 !      COMMON/ENERGY/EH5,ES3,ES3a,ES3b,EH1,EH1a,EH4,EHBIJ(ndim,ndim)
 !      common/pair1/eh2,eh1b,eh1c
 !      common/shortcom/eh3,es4,es5,es6,es7,es7a,es7b,es7c
-      COMMON/RCN1/ER1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
+      COMMON/RCN1/er1,arca1(ndim,ndim,50),n_resa1(ndim,ndim)
 !      COMMON/RES/ER3,er5,er6,er7,Mcom(ndim),Kcom(ndim,100)
       common/otherenergy/E_cord,E_cnum
 

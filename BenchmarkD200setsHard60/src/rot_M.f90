@@ -2,7 +2,7 @@
       use params
       use backup2
       use chainm
-      use openacc
+      !use openacc
       use chain1
       use echain1
       use lengths
@@ -235,6 +235,7 @@ c     prepare the new path------------>
       ny(n1)=y(n)-vy(nn(n1))
       nz(n1)=z(n)-vz(nn(n1))
 !$acc kernels
+!$OMP target teams distribute parallel do simd      
       do i=m2,n2
          ex_n(i)=ax+(ex(i)-ax)*a11+(ey(i)-ay)*a12+(ez(i)-az)*a13 !CA
          ey_n(i)=ay+(ex(i)-ax)*a21+(ey(i)-ay)*a22+(ez(i)-az)*a23
@@ -252,6 +253,7 @@ c     prepare the new path------------>
          ety_n(i)=ay+(etx(i)-ax)*a21+(ety(i)-ay)*a22+(etz(i)-az)*a23
          etz_n(i)=az+(etx(i)-ax)*a31+(ety(i)-ay)*a32+(etz(i)-az)*a33
       enddo
+!$OMP end target teams distribute parallel do simd      
 !$acc end kernels
       d2=(nx(m1)-ex_n(m3))**2+(ny(m1)-ey_n(m3))**2+(nz(m1)-ez_n(m3))**2
       if((d2.lt.23.or.d2.gt.78).and.mbig.eq.0)goto 202

@@ -1,7 +1,7 @@
       subroutine move2
       use params
       use backup2
-      use openacc 
+!      !!use openacc
       use chainm
       use chain1
       use echain1
@@ -97,15 +97,15 @@ c     calculate E_new--------------->
 
 ! !$OMP target enter data map(tofrom:nomm(:),nop(:),nopp(:),noaa(:),nom(:),noa(:))
 ! !$OMP target enter data map(to: nomm, nop, nopp, noaa, nom, noa)
-!$OMP target teams distribute parallel do simd num_teams(1) nowait
-!$OMP&  map(to: nomm, nop, nopp, noaa, nom, noa)
+!//!$OMP target teams distribute parallel do simd num_teams(1) !nowait
+!/!$OMP&  map(to: nomm, nop, nopp, noaa, nom, noa)
 ! !$acc loop gang(1024)
          do pp=1,Lch
             nop(pp)=nopp(pp)    !prepare to calculate energy
             nom(pp)=nomm(pp)
             noa(pp)=noaa(pp)
          enddo
-!$OMP end target teams distribute parallel do simd
+!/!$OMP end target teams distribute parallel do simd
 !// !$acc end kernels !Just added this 
          Enew=EHB(m,m2,1)+ESHORT(m,m2,1) !icnt,nop are repeated.
 ! !$acc loop vector(256)
@@ -130,8 +130,9 @@ c     return back the conformation and calculate E_old --------->
 c     calculate eprofn while dord was calculated when call EHB(m,m2,1)--->
          eprofn=0.0
 !// !$acc kernels loop gang async(2) !gang I just took out
-!$OMP target teams distribute parallel do simd num_teams(1) nowait
-!$OMP&  map(to: nomm, nop, seq, noaa, nom, envir, noa) 
+! !$OMP target teams distribute parallel do simd num_teams(80) !nowait
+!/!$OMP&  map(to: nomm, nop, seq, noaa, nom, envir, noa) 
+! !$OMP parallel do simd private(pp) shared(seq,noa,nop,nom)         
          do pp=1,Lch
             is=seq(pp)          
             ia=noa(pp)          
@@ -145,7 +146,8 @@ c            endif
 !// !$acc atomic update
             eprofn=eprofn+envir(ia,im,ip,is,3)
          enddo
-!$OMP end target teams distribute parallel do simd
+! !$OMP end parallel do simd         
+! !$OMP end target teams distribute parallel do simd
 !// !$acc end kernels
 !// !$acc wait(2)
 !// !$acc end data
@@ -163,11 +165,14 @@ c         Et=E+de
             icnto=icnt          !backup1
             sumcto=sumct        !backup2
 ! !$acc kernels ! loop gang(12) vector(1024) 
+! !$OMP target teams parallel do simd
+! !$OMP parallel do simd private(pp) shared(nop,nom,noa)            
             do pp=1,Lch
                nopp(pp)=nop(pp) !backup3
                nomm(pp)=nom(pp) !backup4
                noaa(pp)=noa(pp) !backup5
             enddo
+! !$OMP end parallel do simd
             eprofo=eprofn       !backup6
             codevsum=codev      !backup7
             didevsum=didev      !backup8

@@ -2,7 +2,7 @@
 	use params
       use backup2
       use chainm
-      use openacc
+      !use openacc
       use chain1
       use echain1
       use lengths

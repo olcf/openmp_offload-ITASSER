@@ -5,12 +5,13 @@
       function ei5(i,idist)
 	use params
 !$acc routine seq
-!$OMP declare target 
+! !$OMP declare target 
       use lengths
       use short1
       use chainm
       use chain1
       use echain1
+!$OMP declare target      
       implicit none
       integer, value :: i, idist
       integer :: im2, ip2

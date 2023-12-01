@@ -1,6 +1,6 @@
       subroutine move3s
       use params
-      use openacc
+!      !use openacc
       use chainm
       use backup2
       use chain1
@@ -103,18 +103,20 @@ c     change conformation to new path -------------->
       ica(m2)=nn(m2)
       ica(0)=ica(2)
       ica(Lch)=ica(Lch-2)
-
+!//!$OMP target enter data map(to: nomm, nop, nopp, noaa, nom, noa)
       if(look(m,m3))then        ! check excluded volumn for passage of [i,m]
 c     calculate E_new--------------->
 !$acc data present(nop(:),nom(:),noa(:),noaa(:),nomm(:),
 !$acc&              nopp(:),envir(:,:,:,:,:))
-!$acc kernels 
+!$acc kernels
+!//!$OMP target teams distribute parallel do simd num_teams(1) nowait
+! !$OMP&  map(to: nomm, nop, nopp, noaa, nom, noa)
          do pp=1,Lch
             nop(pp)=nopp(pp)    !prepare to calculate energy
             nom(pp)=nomm(pp)
             noa(pp)=noaa(pp)
          enddo
-
+!//!$OMP end target teams distribute parallel do simd
          Enew=EHB(m,m3,1)+ESHORT(m,m3,1) !use ifs
          do kkk=m,m3
             afsn(kkk)=afs(kkk)  !keep memory of ifs
@@ -137,6 +139,7 @@ c     return back the conformation and calculate E_old --------->
 c     calculate eprofn while dord was calculated when call EHB(m,m3,1)--->
          eprofn=0.0
 !$acc parallel loop
+!//!$OMP target teams distribute parallel do simd         
          do pp=1,Lch
             is=seq(pp)
             ia=noa(pp)
@@ -144,6 +147,8 @@ c     calculate eprofn while dord was calculated when call EHB(m,m3,1)--->
             im=nom(pp)
             eprofn=eprofn+envir(ia,im,ip,is,3)
          enddo
+!//!$OMP end target teams distribute parallel do simd         
+!//!$OMP target exit data map(from: nomm, nop, nopp, noaa, nom, noa)         
 c     Metropolis ------------------>
          dE=Enew-Eold+dord+en1*(eprofn-eprofo)
 c         E=energ

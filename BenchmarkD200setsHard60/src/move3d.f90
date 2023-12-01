@@ -1,7 +1,7 @@
       subroutine move3d
 	use params
       use backup2
-      use openacc
+!      !use openacc
       use chainm
       use chain1
       use echain1
@@ -151,6 +151,8 @@ c     return back the conformation and calculate E_old --------->
 c     calculate eprofn while dord was calculated when call EHB(m,m3,1)--->
          eprofn=0.0
 !$acc parallel loop
+!!$OMP target teams distribute parallel do simd num_teams(1) nowait
+!!$OMP&  map(to: nomm, nop, seq, noaa, nom, envir, noa)         
          do pp=1,Lch
             is=seq(pp)
             ia=noa(pp)
@@ -158,7 +160,7 @@ c     calculate eprofn while dord was calculated when call EHB(m,m3,1)--->
             im=nom(pp)
             eprofn=eprofn+envir(ia,im,ip,is,3)
          enddo
-
+!!$OMP end target teams distribute parallel do simd 
 c     Metropolis ------------------>
          dE=Enew-Eold+dord+en1*(eprofn-eprofo)
 c         E=energ
@@ -172,11 +174,14 @@ c         Et=E+de
             icnto=icnt
             sumcto=sumct 
 !$acc kernels
+!!$OMP target teams distribute parallel do simd num_teams(1) nowait
+!!$OMP&  map(to: nop,nom,noa,nomm,noaa)
             do pp=1,Lch
                nopp(pp)=nop(pp)
                nomm(pp)=nom(pp)
                noaa(pp)=noa(pp)
             enddo
+!!$OMP end target teams distribute parallel do simd             
             eprofo=eprofn
 c     change the conformation to the new position--------->
             do kkk=m,m3

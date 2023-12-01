@@ -12,6 +12,8 @@
       use eigen
       use short
       use backup1
+      use iso_fortran_env
+      use omp_lib
       implicit integer(i-z)
 !      use chain1
 !      parameter(ndim=1500)
@@ -58,6 +60,7 @@
 
       dimension aNNa(100),aNNt(100),N_out(100) !for output annealing
        real :: TimeB 
+       real :: mvT,mvTs,mvTe 
      
       common/frozen/L_cut,d_xyz0,d_xyz00(ndim),angle0,angle00(ndim)
 
@@ -96,6 +99,7 @@
 ! !$acc&    ecxrep(:,:),ebzrep(:,:),egyrep(:,:),egxrep(:,:),
 ! !$acc&    eczrep(:,:),eyrep(:,:),exrep(:,:),etzrep(:,:))
 ! !$acc kernels loop gang private(i)
+! !$OMP parallel do       
       do i=1,100
          bNSa(i)=0              !aceptance for swep
          bNSt(i)=0
@@ -109,14 +113,15 @@
          armsd_sum(i)=0
          N_rmsd(i)=0
       enddo
+! !$OMP end parallel do       
 ! !$acc end kernels
       E_min=10000
 
       i_tr=0                    !order number of output trajectory
       i_fra=0
       mcycle=0
-!$acc update device(ica,AA)
-      do 1111 icycle=1,ncycle
+!$acc update device(ica,AA)      
+      do 1111 icycle=1,ncycle  
          do 2222 itemp=1,N_rep  !iterate for all the replicas
             atemp=aT_rep(itemp) !current temperature
             aTs=aTs_rep(itemp)
@@ -128,7 +133,9 @@ ccc
                do 4444 i_nfl=1,nfl
                   fff=aranzy(nozy)
                   if(fff.le.bh2)then
+                   mvTs=omp_get_wtime()       
                      call move2
+                   mvTe=omp_get_wtime()  
                   elseif(fff.le.bh3s)then
                      if(nfl3.ge.1)then
                         call move3s
@@ -249,6 +256,7 @@ ccccccccccrecord energy and (x,y,z) cccccccccccccccccccccccc
             E_rep(itemp)=energy_tot() !whole energy
             if(E_rep(itemp).lt.E_min) E_min=E_rep(itemp)
 ! !$acc kernels loop  private(i)
+!!$OMP target teams distribute parallel do simd nowait            
             do i=1,Lch
                icarep(i,itemp)=ica(i)
                if(mv(i).gt.0)then
@@ -273,17 +281,19 @@ ccccccccccrecord energy and (x,y,z) cccccccccccccccccccccccc
                   etzrep(i,itemp)=etz(i)
                endif
             enddo
+!!$OMP end target teams distribute parallel do           
 ! !$acc end kernels
 c^^^^^^^^^^^^record done ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  2222    continue
-
 ccccccccccccccccc<RMSD>, <E> cccccccccccccccccccccccccc
 ! !$acc kernels loop gang private(i)
+!$OMP target teams distribute parallel do  simd num_teams(10)             
          do i=1,N_rep
             energ_sum(i)=energ_sum(i)+E_rep(i)
             energ_sum2(i)=energ_sum2(i)+E_rep(i)*E_rep(i)
             N_sum(i)=N_sum(i)+1
          enddo
+!$OMP end target teams distribute parallel do simd
 ! !$acc end kernels
 !
 ccccccccccccccccccccc snapshots of E(1), E(N_rep) ccccccccccccc
@@ -302,7 +312,7 @@ ccccccccccccccccccccc snapshots of E(1), E(N_rep) ccccccccccccc
                      abz=ezrep(i,k)*0.87
                   endif
                   write(30+k,402)abx,aby,abz
-               enddo
+               enddo                
             enddo
          endif
  401     format(i8,1x,f10.1,2i8)
@@ -319,7 +329,7 @@ ccccccccccccccccc swap replicas cccccccccccccccccccccccccccccccc
             enddo
           endif
           mcycle=mcycle+1
- 1111 continue
+ 1111 continue           
  901  continue
 ! !$acc end data
 c--------------------------Main cycle ended here!!---------------
@@ -382,6 +392,10 @@ ccccccccccccccccccccccc<E>, NNa/NNt ccccccccccccccccccccccccccc
       write(*,*)
       write(*,*)'hour_max=',hour_max
       write(*,*)'hour_real=',atime
+      write(*,*)
+      write(*,*)'start_time',mvTs
+      write(*,*)'end_time',mvTe
+      write(*,*)'total_time',mvT
       write(*,*)
 !!FIX      write(*,*)'ending time: ',fdate()
       

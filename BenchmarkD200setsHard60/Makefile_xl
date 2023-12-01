@@ -2,17 +2,22 @@
 #OPTS=-Mfixed  -fast -mp -g -Minfo=accel -Minfo=mp #-gpu=cc70 #pgi_compiler
 
 #OPTS=-fopenmp -foffload="-lm -latomic" 
-OPTS=-Mfixed -fast -O3  -mp=gpu -Minfo=mp,accel -gpu=cc70   #nvhpc compiler
-#OPTS=-O3 -h omp -h noacc -haccel=nvidia70
-MOD=-module  module
-#MOD=-mno-extern-sdata  module
+#OPTS=-Mfixed -O1  -g  -cuda -mp=gpu -Minfo=mp,accel -gpu=cc70   #nvhpc compiler
+OPTS= -qfixed -g -qcheck -qsigtrap -qsmp=omp -qoffload    #offloading enabled from -O3  -qcheck #-qsigtrap #-qinitauto
+#MOD=-module  module
+# LIBS=-Wl, -wrap=dlopen, -wrap=dlclose, -allow-multiple-definition, -undefined=malloc /sw/summit/forge/22.0.2/lib/64/libdmallocth.a
+MOD=-qextern=module   #XL Compiler
+
+LIBS     = -Wl,-rpath=$(OLCF_XL_ROOT)/lib  -lm   #XL compiler
+
+COMPILER = xl
 #LDFLAGS
 #LIBS= = -Wl,-rpath=$(OLCF_NVHPC_ROOT)/compilers/lib \
            -Wl,-rpath=$(OLCF_NVHPC_ROOT)/math_libs/lib64 -lm
-FC=nvfortran #pgfortran
-#FC=gfortran
+#FC=nvfortran #pgfortran
 #FC=pgfortran
 #FC=xlf90
+FC=xlf2008_r
 OBJS = 	obj/aax.o \
 	obj/aay.o \
 	obj/aaz.o \

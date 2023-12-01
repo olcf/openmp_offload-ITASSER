@@ -1,6 +1,6 @@
       program TASSER
       use params
-      use openacc
+      !use openacc
       use backup2
       use hb
       use sizea
@@ -40,7 +40,9 @@
       use shape
       use backup1
       use ehbc
-      use trackn 
+      use trackn
+      use omp_lib
+      use iso_fortran_env 
       implicit integer(i-z)
       common/logica/goodc
       logical look, goodc(nvec,nvec)
@@ -51,7 +53,7 @@
 !      common/bisec/cax(nvec,nvec),cay(nvec,nvec),caz(nvec,nvec)
 !      common/hb/hbx(nvec,nvec),hby(nvec,nvec),hbz(nvec,nvec)
       common/cutoff/cut1a,cut2a,cut3a,cut4a,cut1b,cut2b,cut3b,cut4b
-      common/hopp/eonehw(0:19)
+!      common/hopp/eonehw(0:19)
       common/looks/exc,exc1,exc2
 !      common/hba/eh5a,Cr2a,acut_bb,acut_cc,acut_vv,acut_hh
 !      common/hbb/eh5b,Cr2b,bcut_bb,bcut_cc,bcut_vv,bcut_hh
@@ -195,6 +197,7 @@ cccc  RMSD:
       data w /ndim*1.0/
 ccc   
        real :: timeA,TimeB
+       real :: mvT,mvTs,mvTe
 ccccccccccccccccccccccccc common input files cccccccccccccccccccccccccccccc
       open(unit=1,file='contact.comm', status='old') !cutoff of contact predi.
       open(unit=2,file='profile3.comm',status='old') !envir

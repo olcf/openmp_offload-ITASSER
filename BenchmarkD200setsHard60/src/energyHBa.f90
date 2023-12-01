@@ -4,10 +4,11 @@
       function energyHBa(i,k,a,axki,ayki,azki,dxi,dyi,dzi,dxk,dyk,dzk)
       use params
 !// !$acc routine seq
-!$OMP declare target
+! !$OMP declare target
       use ENERGY
       use hba
       use hbb
+!$OMP declare target      
       implicit integer(i-z)
       integer, value :: i,k
       real, value :: a,axki,ayki,azki,dxi,dyi,dzi,dxk,dyk,dzk

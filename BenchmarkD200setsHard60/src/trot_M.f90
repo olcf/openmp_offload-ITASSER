@@ -210,7 +210,7 @@ c     backup old path ------------>
       oy(n1)=y(n1)
       oz(n1)=z(n1)
 !$acc kernels async(2)
-!$OMP target teams distribute parallel do num_teams(1) nowait
+! !$OMP target teams distribute parallel do num_teams(1) nowait
       do i=m2,n2
          ex_o(i)=ex(i)          !CA
          ey_o(i)=ey(i)
@@ -228,7 +228,7 @@ c     backup old path ------------>
          ety_o(i)=ety(i)
          etz_o(i)=etz(i)
       enddo
-!$OMP end target teams distribute parallel do
+! !$OMP end target teams distribute parallel do
 
 !$acc end kernels
 c     prepare the new path------------>
@@ -243,7 +243,8 @@ c     prepare the new path------------>
       ny(n1)=y(n)-vy(nn(n1))
       nz(n1)=z(n)-vz(nn(n1))
 !$acc kernels async(2)
-!$OMP target teams distribute parallel do num_teams(80) nowait
+!$OMP target teams distribute parallel do simd  nowait
+!$OMP& map(to:ebz,etx,egz_n,etx_n,ety_n,ety,etz)
       do i=m2,n2
         ex_n(i)=ax0+ax+(ex(i)-ax)*a11+(ey(i)-ay)*a12+(ez(i)-az)*a13 !CA
         ey_n(i)=ay0+ay+(ex(i)-ax)*a21+(ey(i)-ay)*a22+(ez(i)-az)*a23
@@ -261,7 +262,7 @@ c     prepare the new path------------>
         ety_n(i)=ay0+ay+(etx(i)-ax)*a21+(ety(i)-ay)*a22+(etz(i)-az)*a23
         etz_n(i)=az0+az+(etx(i)-ax)*a31+(ety(i)-ay)*a32+(etz(i)-az)*a33
       enddo
-!$OMP end target teams distribute parallel do 
+!$OMP end target teams distribute parallel do simd
 !$acc end kernels
       d2=(nx(m1)-ex_n(m3))**2+(ny(m1)-ey_n(m3))**2+(nz(m1)-ez_n(m3))**2
       if((d2.lt.23.or.d2.gt.78).and.mbig.eq.0)goto 202
@@ -352,6 +353,7 @@ c     return back the conformation and calculate E_old --------->
 
 c     calculate eprofn while dord was calculated when call EHB(m,m3,1)--->
          eprofn=0.0
+!$OMP target teams loop         
          do pp=1,Lch
             is=seq(pp)
             ia=noa(pp)
@@ -359,6 +361,7 @@ c     calculate eprofn while dord was calculated when call EHB(m,m3,1)--->
             im=nom(pp)
             eprofn=eprofn+envir(ia,im,ip,is,3)
          enddo
+!$OMP end target teams loop         
 !$acc end kernels
 c     Metropolis ------------------>
          dE=Enew-Eold+dord+en1*(eprofn-eprofo)

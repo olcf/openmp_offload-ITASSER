@@ -1,0 +1,679 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 41.83      1.51     1.51   160189     0.00     0.00  ehb_
+ 20.78      2.26     0.75   160189     0.00     0.00  eshort_
+ 10.53      2.64     0.38        1     0.38     0.38  prepare_move2_
+  6.65      2.88     0.24    92058     0.00     0.00  look_
+  4.43      3.04     0.16        1     0.16     0.16  prepare_neighbors_
+  3.60      3.17     0.13    44669     0.00     0.00  get_center_
+  3.05      3.28     0.11        1     0.11     0.11  prepare_beta_
+  1.94      3.35     0.07    45607     0.00     0.00  move2_
+  0.83      3.38     0.03 20688930     0.00     0.00  __aax_mod_MOD_aax
+  0.83      3.41     0.03 20688930     0.00     0.00  __aay_mod_MOD_aay
+  0.83      3.44     0.03    44669     0.00     0.00  eigenvalue_
+  0.83      3.47     0.03    13571     0.00     0.00  trot_m_
+  0.83      3.50     0.03     3797     0.00     0.00  move5s_
+  0.55      3.52     0.02 20688930     0.00     0.00  __aaz_mod_MOD_aaz
+  0.55      3.54     0.02     3721     0.00     0.00  move5d_
+  0.55      3.56     0.02     2860     0.00     0.00  move_c_end_
+  0.28      3.57     0.01   743282     0.00     0.00  aranzy_
+  0.28      3.58     0.01     9624     0.00     0.00  move3d_
+  0.28      3.59     0.01     9457     0.00     0.00  move3s_
+  0.28      3.60     0.01     4773     0.00     0.00  move4d_
+  0.28      3.61     0.01        1     0.01     2.96  template_simulation_
+  0.00      3.61     0.00   886973     0.00     0.00  __ei5_mod_MOD_ei5
+  0.00      3.61     0.00   290811     0.00     0.00  __avv_mod_MOD_avv
+  0.00      3.61     0.00   121180     0.00     0.00  __energyhba_mod_MOD_energyhba
+  0.00      3.61     0.00    80069     0.00     0.00  metro_
+  0.00      3.61     0.00    57704     0.00     0.00  weight12_
+  0.00      3.61     0.00    28852     0.00     0.00  square2_
+  0.00      3.61     0.00     7650     0.00     0.00  move6_
+  0.00      3.61     0.00     6513     0.00     0.00  __energyhbb_mod_MOD_energyhbb
+  0.00      3.61     0.00     4737     0.00     0.00  move4s_
+  0.00      3.61     0.00     2774     0.00     0.00  move_n_end_
+  0.00      3.61     0.00      440     0.00     0.00  di_
+  0.00      3.61     0.00       26     0.00     0.00  energy_tot_
+  0.00      3.61     0.00       26     0.00     0.00  get_vvv_
+  0.00      3.61     0.00       25     0.00     0.00  initial_move_
+  0.00      3.61     0.00       25     0.00     0.00  set_current_rs_
+  0.00      3.61     0.00       10     0.00     0.00  metro_swap_
+  0.00      3.61     0.00       10     0.00     0.00  swap_rs_
+  0.00      3.61     0.00        8     0.00     0.00  get_bond_
+  0.00      3.61     0.00        8     0.00     0.00  mcheck_
+  0.00      3.61     0.00        3     0.00     0.00  connect_
+  0.00      3.61     0.00        3     0.00     0.00  sort_ras_
+  0.00      3.61     0.00        1     0.00     3.61  MAIN__
+  0.00      3.61     0.00        1     0.00     0.00  __one_MOD_read_centro
+  0.00      3.61     0.00        1     0.00     0.00  get_acorder_
+  0.00      3.61     0.00        1     0.00     0.00  move_point_
+  0.00      3.61     0.00        1     0.00     0.00  prepare_frg_
+  0.00      3.61     0.00        1     0.00     0.00  prepare_vectors_
+  0.00      3.61     0.00        1     0.00     0.00  read_cacontact8_
+  0.00      3.61     0.00        1     0.00     0.00  read_cacontact_
+  0.00      3.61     0.00        1     0.00     0.00  read_concut_
+  0.00      3.61     0.00        1     0.00     0.00  read_contactrestrain_
+  0.00      3.61     0.00        1     0.00     0.00  read_distantrestrain_
+  0.00      3.61     0.00        1     0.00     0.00  read_e13_
+  0.00      3.61     0.00        1     0.00     0.00  read_e14_
+  0.00      3.61     0.00        1     0.00     0.00  read_e15_
+  0.00      3.61     0.00        1     0.00     0.00  read_exp_
+  0.00      3.61     0.00        1     0.00     0.00  read_longdistantrestrain_
+  0.00      3.61     0.00        1     0.00     0.00  read_par_
+  0.00      3.61     0.00        1     0.00     0.00  read_profile_
+  0.00      3.61     0.00        1     0.00     0.00  read_quarsi3_
+  0.00      3.61     0.00        1     0.00     0.00  read_seq_
+  0.00      3.61     0.00        1     0.00     0.00  read_seqcontact_
+  0.00      3.61     0.00        1     0.00     0.00  reset_temperature_
+  0.00      3.61     0.00        1     0.00     0.00  set_common_
+  0.00      3.61     0.00        1     0.00     0.00  set_ehb_
+  0.00      3.61     0.00        1     0.00     0.00  set_move_retio_
+  0.00      3.61     0.00        1     0.00     0.00  set_temperature_
+  0.00      3.61     0.00        1     0.00     0.00  template_initial_
+  0.00      3.61     0.00        1     0.00     0.00  write_parameter_
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.28% of 3.61 seconds
+
+index % time    self  children    called     name
+                0.00    3.61       1/1           main [2]
+[1]    100.0    0.00    3.61       1         MAIN__ [1]
+                0.01    2.95       1/1           template_simulation_ [3]
+                0.38    0.00       1/1           prepare_move2_ [7]
+                0.16    0.00       1/1           prepare_neighbors_ [11]
+                0.11    0.00       1/1           prepare_beta_ [18]
+                0.00    0.00       1/1           template_initial_ [31]
+                0.00    0.00       1/1           set_common_ [36]
+                0.00    0.00       1/1           write_parameter_ [37]
+                0.00    0.00       1/1           __one_MOD_read_centro [107]
+                0.00    0.00       1/1           read_seq_ [61]
+                0.00    0.00       1/1           read_e13_ [53]
+                0.00    0.00       1/1           read_profile_ [59]
+                0.00    0.00       1/1           read_e15_ [55]
+                0.00    0.00       1/1           read_e14_ [54]
+                0.00    0.00       1/1           read_par_ [58]
+                0.00    0.00       1/1           read_quarsi3_ [60]
+                0.00    0.00       1/1           read_contactrestrain_ [51]
+                0.00    0.00       1/1           read_concut_ [50]
+                0.00    0.00       1/1           read_longdistantrestrain_ [57]
+                0.00    0.00       1/1           read_distantrestrain_ [52]
+                0.00    0.00       1/1           read_cacontact_ [49]
+                0.00    0.00       1/1           read_exp_ [56]
+                0.00    0.00       1/1           read_seqcontact_ [62]
+                0.00    0.00       1/1           read_cacontact8_ [48]
+                0.00    0.00       1/1           set_temperature_ [66]
+                0.00    0.00       1/1           reset_temperature_ [63]
+                0.00    0.00       1/1           prepare_vectors_ [47]
+                0.00    0.00       1/1           set_ehb_ [64]
+                0.00    0.00       1/1           get_acorder_ [44]
+                0.00    0.00       1/1           prepare_frg_ [46]
+                0.00    0.00       1/1           set_move_retio_ [65]
+-----------------------------------------------
+                                                 <spontaneous>
+[2]    100.0    0.00    3.61                 main [2]
+                0.00    3.61       1/1           MAIN__ [1]
+-----------------------------------------------
+                0.01    2.95       1/1           MAIN__ [1]
+[3]     82.0    0.01    2.95       1         template_simulation_ [3]
+                0.07    1.35   45607/45607       move2_ [5]
+                0.01    0.28    9624/9624        move3d_ [8]
+                0.01    0.28    9457/9457        move3s_ [9]
+                0.03    0.13   13571/13571       trot_m_ [13]
+                0.01    0.13    4773/4773        move4d_ [14]
+                0.03    0.11    3797/3797        move5s_ [15]
+                0.00    0.13    4737/4737        move4s_ [16]
+                0.02    0.10    3721/3721        move5d_ [17]
+                0.02    0.08    2860/2860        move_c_end_ [19]
+                0.00    0.09    7650/7650        move6_ [20]
+                0.00    0.07    2774/2774        move_n_end_ [21]
+                0.00    0.00  108571/743282      aranzy_ [26]
+                0.00    0.00      25/25          initial_move_ [28]
+                0.00    0.00      26/26          energy_tot_ [29]
+                0.00    0.00      10/10          swap_rs_ [35]
+                0.00    0.00      25/25          set_current_rs_ [41]
+-----------------------------------------------
+                0.00    0.00      25/160189      initial_move_ [28]
+                0.00    0.00      26/160189      energy_tot_ [29]
+                0.04    0.00    3788/160189      move_n_end_ [21]
+                0.04    0.00    4496/160189      move_c_end_ [19]
+                0.05    0.00    5546/160189      move6_ [20]
+                0.05    0.00    5576/160189      move5d_ [17]
+                0.06    0.00    6166/160189      move5s_ [15]
+                0.07    0.00    7266/160189      trot_m_ [13]
+                0.07    0.00    7634/160189      move4d_ [14]
+                0.07    0.00    7868/160189      move4s_ [16]
+                0.16    0.00   16524/160189      move3s_ [9]
+                0.16    0.00   16538/160189      move3d_ [8]
+                0.74    0.00   78736/160189      move2_ [5]
+[4]     42.1    1.51    0.01  160189         ehb_ [4]
+                0.00    0.00 2361612/20688930     __aax_mod_MOD_aax [23]
+                0.00    0.00 2361612/20688930     __aay_mod_MOD_aay [24]
+                0.00    0.00 2361612/20688930     __aaz_mod_MOD_aaz [25]
+                0.00    0.00  886973/886973      __ei5_mod_MOD_ei5 [103]
+                0.00    0.00  290811/290811      __avv_mod_MOD_avv [104]
+                0.00    0.00  121180/121180      __energyhba_mod_MOD_energyhba [105]
+                0.00    0.00    6513/6513        __energyhbb_mod_MOD_energyhbb [106]
+-----------------------------------------------
+                0.07    1.35   45607/45607       template_simulation_ [3]
+[5]     39.3    0.07    1.35   45607         move2_ [5]
+                0.74    0.00   78736/160189      ehb_ [4]
+                0.37    0.03   78736/160189      eshort_ [6]
+                0.11    0.00   42418/92058       look_ [10]
+                0.07    0.02   23819/44669       get_center_ [12]
+                0.00    0.00  116002/743282      aranzy_ [26]
+                0.00    0.00   39368/80069       metro_ [27]
+-----------------------------------------------
+                0.00    0.00      25/160189      initial_move_ [28]
+                0.00    0.00      26/160189      energy_tot_ [29]
+                0.02    0.00    3788/160189      move_n_end_ [21]
+                0.02    0.00    4496/160189      move_c_end_ [19]
+                0.03    0.00    5546/160189      move6_ [20]
+                0.03    0.00    5576/160189      move5d_ [17]
+                0.03    0.00    6166/160189      move5s_ [15]
+                0.03    0.00    7266/160189      trot_m_ [13]
+                0.04    0.00    7634/160189      move4d_ [14]
+                0.04    0.00    7868/160189      move4s_ [16]
+                0.08    0.01   16524/160189      move3s_ [9]
+                0.08    0.01   16538/160189      move3d_ [8]
+                0.37    0.03   78736/160189      move2_ [5]
+[6]     22.7    0.75    0.07  160189         eshort_ [6]
+                0.03    0.00 18303194/20688930     __aax_mod_MOD_aax [23]
+                0.03    0.00 18303194/20688930     __aay_mod_MOD_aay [24]
+                0.02    0.00 18303194/20688930     __aaz_mod_MOD_aaz [25]
+-----------------------------------------------
+                0.38    0.00       1/1           MAIN__ [1]
+[7]     10.5    0.38    0.00       1         prepare_move2_ [7]
+-----------------------------------------------
+                0.01    0.28    9624/9624        template_simulation_ [3]
+[8]      8.1    0.01    0.28    9624         move3d_ [8]
+                0.16    0.00   16538/160189      ehb_ [4]
+                0.08    0.01   16538/160189      eshort_ [6]
+                0.03    0.00    9602/92058       look_ [10]
+                0.01    0.00    4369/44669       get_center_ [12]
+                0.00    0.00   68497/743282      aranzy_ [26]
+                0.00    0.00    8269/80069       metro_ [27]
+-----------------------------------------------
+                0.01    0.28    9457/9457        template_simulation_ [3]
+[9]      8.1    0.01    0.28    9457         move3s_ [9]
+                0.16    0.00   16524/160189      ehb_ [4]
+                0.08    0.01   16524/160189      eshort_ [6]
+                0.02    0.00    9407/92058       look_ [10]
+                0.01    0.00    4417/44669       get_center_ [12]
+                0.00    0.00   38407/743282      aranzy_ [26]
+                0.00    0.00    8262/80069       metro_ [27]
+-----------------------------------------------
+                0.01    0.00    2774/92058       move_n_end_ [21]
+                0.01    0.00    2860/92058       move_c_end_ [19]
+                0.01    0.00    2942/92058       move6_ [20]
+                0.01    0.00    3721/92058       move5d_ [17]
+                0.01    0.00    3797/92058       move5s_ [15]
+                0.01    0.00    4737/92058       move4s_ [16]
+                0.01    0.00    4771/92058       move4d_ [14]
+                0.01    0.00    5029/92058       trot_m_ [13]
+                0.02    0.00    9407/92058       move3s_ [9]
+                0.03    0.00    9602/92058       move3d_ [8]
+                0.11    0.00   42418/92058       move2_ [5]
+[10]     6.6    0.24    0.00   92058         look_ [10]
+-----------------------------------------------
+                0.16    0.00       1/1           MAIN__ [1]
+[11]     4.4    0.16    0.00       1         prepare_neighbors_ [11]
+-----------------------------------------------
+                0.00    0.00      25/44669       initial_move_ [28]
+                0.00    0.00     855/44669       move_n_end_ [21]
+                0.00    0.00    1206/44669       move5d_ [17]
+                0.00    0.00    1346/44669       move5s_ [15]
+                0.00    0.00    1472/44669       move_c_end_ [19]
+                0.00    0.00    1474/44669       move6_ [20]
+                0.01    0.00    1738/44669       move4d_ [14]
+                0.01    0.00    1819/44669       move4s_ [16]
+                0.01    0.00    2129/44669       trot_m_ [13]
+                0.01    0.00    4369/44669       move3d_ [8]
+                0.01    0.00    4417/44669       move3s_ [9]
+                0.07    0.02   23819/44669       move2_ [5]
+[12]     4.4    0.13    0.03   44669         get_center_ [12]
+                0.03    0.00   44669/44669       eigenvalue_ [22]
+-----------------------------------------------
+                0.03    0.13   13571/13571       template_simulation_ [3]
+[13]     4.4    0.03    0.13   13571         trot_m_ [13]
+                0.07    0.00    7266/160189      ehb_ [4]
+                0.03    0.00    7266/160189      eshort_ [6]
+                0.01    0.00    5029/92058       look_ [10]
+                0.01    0.00    2129/44669       get_center_ [12]
+                0.00    0.00  117618/743282      aranzy_ [26]
+                0.00    0.00    3633/80069       metro_ [27]
+-----------------------------------------------
+                0.01    0.13    4773/4773        template_simulation_ [3]
+[14]     3.9    0.01    0.13    4773         move4d_ [14]
+                0.07    0.00    7634/160189      ehb_ [4]
+                0.04    0.00    7634/160189      eshort_ [6]
+                0.01    0.00    4771/92058       look_ [10]
+                0.01    0.00    1738/44669       get_center_ [12]
+                0.00    0.00   49399/743282      aranzy_ [26]
+                0.00    0.00    3817/80069       metro_ [27]
+-----------------------------------------------
+                0.03    0.11    3797/3797        template_simulation_ [3]
+[15]     3.7    0.03    0.11    3797         move5s_ [15]
+                0.06    0.00    6166/160189      ehb_ [4]
+                0.03    0.00    6166/160189      eshort_ [6]
+                0.01    0.00    3797/92058       look_ [10]
+                0.00    0.00    1346/44669       get_center_ [12]
+                0.00    0.00   26617/743282      aranzy_ [26]
+                0.00    0.00    3083/80069       metro_ [27]
+-----------------------------------------------
+                0.00    0.13    4737/4737        template_simulation_ [3]
+[16]     3.7    0.00    0.13    4737         move4s_ [16]
+                0.07    0.00    7868/160189      ehb_ [4]
+                0.04    0.00    7868/160189      eshort_ [6]
+                0.01    0.00    4737/92058       look_ [10]
+                0.01    0.00    1819/44669       get_center_ [12]
+                0.00    0.00   26314/743282      aranzy_ [26]
+                0.00    0.00    3934/80069       metro_ [27]
+-----------------------------------------------
+                0.02    0.10    3721/3721        template_simulation_ [3]
+[17]     3.2    0.02    0.10    3721         move5d_ [17]
+                0.05    0.00    5576/160189      ehb_ [4]
+                0.03    0.00    5576/160189      eshort_ [6]
+                0.01    0.00    3721/92058       look_ [10]
+                0.00    0.00    1206/44669       get_center_ [12]
+                0.00    0.00   49524/743282      aranzy_ [26]
+                0.00    0.00    2788/80069       metro_ [27]
+-----------------------------------------------
+                0.11    0.00       1/1           MAIN__ [1]
+[18]     3.0    0.11    0.00       1         prepare_beta_ [18]
+-----------------------------------------------
+                0.02    0.08    2860/2860        template_simulation_ [3]
+[19]     2.7    0.02    0.08    2860         move_c_end_ [19]
+                0.04    0.00    4496/160189      ehb_ [4]
+                0.02    0.00    4496/160189      eshort_ [6]
+                0.01    0.00    2860/92058       look_ [10]
+                0.00    0.00    1472/44669       get_center_ [12]
+                0.00    0.00   11196/743282      aranzy_ [26]
+                0.00    0.00    2248/80069       metro_ [27]
+-----------------------------------------------
+                0.00    0.09    7650/7650        template_simulation_ [3]
+[20]     2.6    0.00    0.09    7650         move6_ [20]
+                0.05    0.00    5546/160189      ehb_ [4]
+                0.03    0.00    5546/160189      eshort_ [6]
+                0.01    0.00    2942/92058       look_ [10]
+                0.00    0.00    1474/44669       get_center_ [12]
+                0.00    0.00   58743/743282      aranzy_ [26]
+                0.00    0.00    2773/80069       metro_ [27]
+-----------------------------------------------
+                0.00    0.07    2774/2774        template_simulation_ [3]
+[21]     1.8    0.00    0.07    2774         move_n_end_ [21]
+                0.04    0.00    3788/160189      ehb_ [4]
+                0.02    0.00    3788/160189      eshort_ [6]
+                0.01    0.00    2774/92058       look_ [10]
+                0.00    0.00     855/44669       get_center_ [12]
+                0.00    0.00   14662/743282      aranzy_ [26]
+                0.00    0.00    1894/80069       metro_ [27]
+-----------------------------------------------
+                0.03    0.00   44669/44669       get_center_ [12]
+[22]     0.8    0.03    0.00   44669         eigenvalue_ [22]
+-----------------------------------------------
+                0.00    0.00     100/20688930     template_initial_ [31]
+                0.00    0.00   24024/20688930     get_vvv_ [30]
+                0.00    0.00 2361612/20688930     ehb_ [4]
+                0.03    0.00 18303194/20688930     eshort_ [6]
+[23]     0.8    0.03    0.00 20688930         __aax_mod_MOD_aax [23]
+-----------------------------------------------
+                0.00    0.00     100/20688930     template_initial_ [31]
+                0.00    0.00   24024/20688930     get_vvv_ [30]
+                0.00    0.00 2361612/20688930     ehb_ [4]
+                0.03    0.00 18303194/20688930     eshort_ [6]
+[24]     0.8    0.03    0.00 20688930         __aay_mod_MOD_aay [24]
+-----------------------------------------------
+                0.00    0.00     100/20688930     template_initial_ [31]
+                0.00    0.00   24024/20688930     get_vvv_ [30]
+                0.00    0.00 2361612/20688930     ehb_ [4]
+                0.02    0.00 18303194/20688930     eshort_ [6]
+[25]     0.6    0.02    0.00 20688930         __aaz_mod_MOD_aaz [25]
+-----------------------------------------------
+                0.00    0.00       1/743282      set_common_ [36]
+                0.00    0.00       1/743282      write_parameter_ [37]
+                0.00    0.00      10/743282      metro_swap_ [34]
+                0.00    0.00      16/743282      get_bond_ [32]
+                0.00    0.00   11196/743282      move_c_end_ [19]
+                0.00    0.00   14662/743282      move_n_end_ [21]
+                0.00    0.00   26314/743282      move4s_ [16]
+                0.00    0.00   26617/743282      move5s_ [15]
+                0.00    0.00   38407/743282      move3s_ [9]
+                0.00    0.00   49399/743282      move4d_ [14]
+                0.00    0.00   49524/743282      move5d_ [17]
+                0.00    0.00   57704/743282      metro_ [27]
+                0.00    0.00   58743/743282      move6_ [20]
+                0.00    0.00   68497/743282      move3d_ [8]
+                0.00    0.00  108571/743282      template_simulation_ [3]
+                0.00    0.00  116002/743282      move2_ [5]
+                0.00    0.00  117618/743282      trot_m_ [13]
+[26]     0.3    0.01    0.00  743282         aranzy_ [26]
+-----------------------------------------------
+                0.00    0.00    1894/80069       move_n_end_ [21]
+                0.00    0.00    2248/80069       move_c_end_ [19]
+                0.00    0.00    2773/80069       move6_ [20]
+                0.00    0.00    2788/80069       move5d_ [17]
+                0.00    0.00    3083/80069       move5s_ [15]
+                0.00    0.00    3633/80069       trot_m_ [13]
+                0.00    0.00    3817/80069       move4d_ [14]
+                0.00    0.00    3934/80069       move4s_ [16]
+                0.00    0.00    8262/80069       move3s_ [9]
+                0.00    0.00    8269/80069       move3d_ [8]
+                0.00    0.00   39368/80069       move2_ [5]
+[27]     0.0    0.00    0.00   80069         metro_ [27]
+                0.00    0.00   57704/743282      aranzy_ [26]
+                0.00    0.00   57704/57704       weight12_ [38]
+-----------------------------------------------
+                0.00    0.00      25/25          template_simulation_ [3]
+[28]     0.0    0.00    0.00      25         initial_move_ [28]
+                0.00    0.00      25/160189      ehb_ [4]
+                0.00    0.00      25/160189      eshort_ [6]
+                0.00    0.00      25/44669       get_center_ [12]
+                0.00    0.00      25/26          get_vvv_ [30]
+-----------------------------------------------
+                0.00    0.00      26/26          template_simulation_ [3]
+[29]     0.0    0.00    0.00      26         energy_tot_ [29]
+                0.00    0.00      26/160189      ehb_ [4]
+                0.00    0.00      26/160189      eshort_ [6]
+-----------------------------------------------
+                0.00    0.00       1/26          template_initial_ [31]
+                0.00    0.00      25/26          initial_move_ [28]
+[30]     0.0    0.00    0.00      26         get_vvv_ [30]
+                0.00    0.00   24024/20688930     __aax_mod_MOD_aax [23]
+                0.00    0.00   24024/20688930     __aay_mod_MOD_aay [24]
+                0.00    0.00   24024/20688930     __aaz_mod_MOD_aaz [25]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[31]     0.0    0.00    0.00       1         template_initial_ [31]
+                0.00    0.00       1/26          get_vvv_ [30]
+                0.00    0.00       3/3           connect_ [33]
+                0.00    0.00     100/20688930     __aax_mod_MOD_aax [23]
+                0.00    0.00     100/20688930     __aay_mod_MOD_aay [24]
+                0.00    0.00     100/20688930     __aaz_mod_MOD_aaz [25]
+                0.00    0.00     100/440         di_ [40]
+                0.00    0.00       3/3           sort_ras_ [43]
+                0.00    0.00       1/1           move_point_ [45]
+-----------------------------------------------
+                0.00    0.00       8/8           connect_ [33]
+[32]     0.0    0.00    0.00       8         get_bond_ [32]
+                0.00    0.00      16/743282      aranzy_ [26]
+-----------------------------------------------
+                0.00    0.00       3/3           template_initial_ [31]
+[33]     0.0    0.00    0.00       3         connect_ [33]
+                0.00    0.00       8/8           get_bond_ [32]
+                0.00    0.00       8/8           mcheck_ [42]
+                0.00    0.00       5/440         di_ [40]
+-----------------------------------------------
+                0.00    0.00      10/10          swap_rs_ [35]
+[34]     0.0    0.00    0.00      10         metro_swap_ [34]
+                0.00    0.00      10/743282      aranzy_ [26]
+-----------------------------------------------
+                0.00    0.00      10/10          template_simulation_ [3]
+[35]     0.0    0.00    0.00      10         swap_rs_ [35]
+                0.00    0.00      10/10          metro_swap_ [34]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[36]     0.0    0.00    0.00       1         set_common_ [36]
+                0.00    0.00       1/743282      aranzy_ [26]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[37]     0.0    0.00    0.00       1         write_parameter_ [37]
+                0.00    0.00       1/743282      aranzy_ [26]
+-----------------------------------------------
+                0.00    0.00   57704/57704       metro_ [27]
+[38]     0.0    0.00    0.00   57704         weight12_ [38]
+                0.00    0.00   28852/28852       square2_ [39]
+-----------------------------------------------
+                0.00    0.00   28852/28852       weight12_ [38]
+[39]     0.0    0.00    0.00   28852         square2_ [39]
+-----------------------------------------------
+                0.00    0.00       5/440         connect_ [33]
+                0.00    0.00     100/440         template_initial_ [31]
+                0.00    0.00     335/440         mcheck_ [42]
+[40]     0.0    0.00    0.00     440         di_ [40]
+-----------------------------------------------
+                0.00    0.00      25/25          template_simulation_ [3]
+[41]     0.0    0.00    0.00      25         set_current_rs_ [41]
+-----------------------------------------------
+                0.00    0.00       8/8           connect_ [33]
+[42]     0.0    0.00    0.00       8         mcheck_ [42]
+                0.00    0.00     335/440         di_ [40]
+-----------------------------------------------
+                0.00    0.00       3/3           template_initial_ [31]
+[43]     0.0    0.00    0.00       3         sort_ras_ [43]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[44]     0.0    0.00    0.00       1         get_acorder_ [44]
+-----------------------------------------------
+                0.00    0.00       1/1           template_initial_ [31]
+[45]     0.0    0.00    0.00       1         move_point_ [45]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[46]     0.0    0.00    0.00       1         prepare_frg_ [46]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[47]     0.0    0.00    0.00       1         prepare_vectors_ [47]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[48]     0.0    0.00    0.00       1         read_cacontact8_ [48]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[49]     0.0    0.00    0.00       1         read_cacontact_ [49]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[50]     0.0    0.00    0.00       1         read_concut_ [50]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[51]     0.0    0.00    0.00       1         read_contactrestrain_ [51]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[52]     0.0    0.00    0.00       1         read_distantrestrain_ [52]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[53]     0.0    0.00    0.00       1         read_e13_ [53]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[54]     0.0    0.00    0.00       1         read_e14_ [54]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[55]     0.0    0.00    0.00       1         read_e15_ [55]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[56]     0.0    0.00    0.00       1         read_exp_ [56]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[57]     0.0    0.00    0.00       1         read_longdistantrestrain_ [57]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[58]     0.0    0.00    0.00       1         read_par_ [58]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[59]     0.0    0.00    0.00       1         read_profile_ [59]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[60]     0.0    0.00    0.00       1         read_quarsi3_ [60]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[61]     0.0    0.00    0.00       1         read_seq_ [61]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[62]     0.0    0.00    0.00       1         read_seqcontact_ [62]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[63]     0.0    0.00    0.00       1         reset_temperature_ [63]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[64]     0.0    0.00    0.00       1         set_ehb_ [64]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[65]     0.0    0.00    0.00       1         set_move_retio_ [65]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[66]     0.0    0.00    0.00       1         set_temperature_ [66]
+-----------------------------------------------
+                0.00    0.00  886973/886973      ehb_ [4]
+[103]    0.0    0.00    0.00  886973         __ei5_mod_MOD_ei5 [103]
+-----------------------------------------------
+                0.00    0.00  290811/290811      ehb_ [4]
+[104]    0.0    0.00    0.00  290811         __avv_mod_MOD_avv [104]
+-----------------------------------------------
+                0.00    0.00  121180/121180      ehb_ [4]
+[105]    0.0    0.00    0.00  121180         __energyhba_mod_MOD_energyhba [105]
+-----------------------------------------------
+                0.00    0.00    6513/6513        ehb_ [4]
+[106]    0.0    0.00    0.00    6513         __energyhbb_mod_MOD_energyhbb [106]
+-----------------------------------------------
+                0.00    0.00       1/1           MAIN__ [1]
+[107]    0.0    0.00    0.00       1         __one_MOD_read_centro [107]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+   [1] MAIN__                 [34] metro_swap_            [55] read_e15_
+  [23] __aax_mod_MOD_aax       [5] move2_                 [56] read_exp_
+  [24] __aay_mod_MOD_aay       [8] move3d_                [57] read_longdistantrestrain_
+  [25] __aaz_mod_MOD_aaz       [9] move3s_                [58] read_par_
+ [104] __avv_mod_MOD_avv      [14] move4d_                [59] read_profile_
+ [103] __ei5_mod_MOD_ei5      [16] move4s_                [60] read_quarsi3_
+ [105] __energyhba_mod_MOD_energyhba [17] move5d_         [61] read_seq_
+ [106] __energyhbb_mod_MOD_energyhbb [15] move5s_         [62] read_seqcontact_
+ [107] __one_MOD_read_centro  [20] move6_                 [63] reset_temperature_
+  [26] aranzy_                [19] move_c_end_            [36] set_common_
+  [33] connect_               [21] move_n_end_            [41] set_current_rs_
+  [40] di_                    [45] move_point_            [64] set_ehb_
+   [4] ehb_                   [18] prepare_beta_          [65] set_move_retio_
+  [22] eigenvalue_            [46] prepare_frg_           [66] set_temperature_
+  [29] energy_tot_             [7] prepare_move2_         [43] sort_ras_
+   [6] eshort_                [11] prepare_neighbors_     [39] square2_
+  [44] get_acorder_           [47] prepare_vectors_       [35] swap_rs_
+  [32] get_bond_              [48] read_cacontact8_       [31] template_initial_
+  [12] get_center_            [49] read_cacontact_         [3] template_simulation_
+  [30] get_vvv_               [50] read_concut_           [13] trot_m_
+  [28] initial_move_          [51] read_contactrestrain_  [38] weight12_
+  [10] look_                  [52] read_distantrestrain_  [37] write_parameter_
+  [42] mcheck_                [53] read_e13_
+  [27] metro_                 [54] read_e14_

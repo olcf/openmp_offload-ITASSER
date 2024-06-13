@@ -2,7 +2,7 @@
 #OPTS=-Mfixed  -fast -mp -g -Minfo=accel -Minfo=mp #-gpu=cc70 #pgi_compiler
 
 #OPTS=-fopenmp -foffload="-lm -latomic" 
-OPTS=-ffixed-form  -g  -Ofast -ffpe-trap=invalid,zero,overflow -foffload="-march=gfx90a -lm" -fopenmp #-fbounds-check -fopenmp  #-g -cuda -mp=gpu -Minfo=mp,accel -gpu=cc70   #nvhpc compiler
+OPTS=-ffixed -O3 -hnoacc -homp  #-Ofast -fopenmp #-fbounds-check -fopenmp  #-g -cuda -mp=gpu -Minfo=mp,accel -gpu=cc70   #nvhpc compiler
 #OPTS=-O3 -h omp -h noacc -haccel=nvidia70
 
 MOD=-I module   
@@ -12,8 +12,8 @@ MOD=-I module
 LIBS     = -Wl,-rpath=$(OLCF_GCC_ROOT)/lib64 -lm # -foffload=nvptx-none="-Ofast -lm  -latomic -misa=sm_35" # -Wl,-rpath=/sw/summit/gcc/12.1.0-0/lib64 -lm -foffload=nvptx-none="-Ofast -lm -latomic -misa=sm_35"
 #LIBS= -Wl,-rpath=$(OLCF_GCC_ROOT)/compilers/lib \
            -Wl,-rpath=$(OLCF_GCC_ROOT)/math_libs/lib64 -lm
-FC=gfortran #pgfortran
-COMPILER = GCC
+FC=ftn #pgfortran
+COMPILER = cce
 #FC=gfortran
 #FC=pgfortran
 #FC=xlf90

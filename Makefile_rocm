@@ -2,18 +2,18 @@
 #OPTS=-Mfixed  -fast -mp -g -Minfo=accel -Minfo=mp #-gpu=cc70 #pgi_compiler
 
 #OPTS=-fopenmp -foffload="-lm -latomic" 
-OPTS=-ffixed-form  -g  -Ofast -ffpe-trap=invalid,zero,overflow -foffload="-march=gfx90a -lm" -fopenmp #-fbounds-check -fopenmp  #-g -cuda -mp=gpu -Minfo=mp,accel -gpu=cc70   #nvhpc compiler
+OPTS=-Mfixed -g -Ofast -fopenmp #-fopenmp #-fbounds-check -fopenmp  #-g -cuda -mp=gpu -Minfo=mp,accel -gpu=cc70   #nvhpc compiler
 #OPTS=-O3 -h omp -h noacc -haccel=nvidia70
 
 MOD=-I module   
 # MOD=-Wno-extra-semi  module
 #MOD=-mno-extern-sdata  module
 #LDFLAGS
-LIBS     = -Wl,-rpath=$(OLCF_GCC_ROOT)/lib64 -lm # -foffload=nvptx-none="-Ofast -lm  -latomic -misa=sm_35" # -Wl,-rpath=/sw/summit/gcc/12.1.0-0/lib64 -lm -foffload=nvptx-none="-Ofast -lm -latomic -misa=sm_35"
+LIBS     = -lm #-Wl,-rpath=$(OLCF_GCC_ROOT)/lib64 -lm # -foffload=nvptx-none="-Ofast -lm  -latomic -misa=sm_35" # -Wl,-rpath=/sw/summit/gcc/12.1.0-0/lib64 -lm -foffload=nvptx-none="-Ofast -lm -latomic -misa=sm_35"
 #LIBS= -Wl,-rpath=$(OLCF_GCC_ROOT)/compilers/lib \
            -Wl,-rpath=$(OLCF_GCC_ROOT)/math_libs/lib64 -lm
-FC=gfortran #pgfortran
-COMPILER = GCC
+FC=ftn #pgfortran
+COMPILER = rocm
 #FC=gfortran
 #FC=pgfortran
 #FC=xlf90
@@ -227,11 +227,11 @@ obj/mods.o: src/mods.f90
 obj/move2.o: src/move2.f90 obj/mods.o 
 	$(FC) -c  $(OPTS) $(MOD) src/move2.f90 -o obj/move2.o 
 
-obj/move3d.o: src/move3d.f90 obj/mods.o 
-	$(FC) -c  $(OPTS) $(MOD) src/move3d.f90 -o obj/move3d.o 
+obj/move3d.o: src/move3d_omp.f90 obj/mods.o 
+	$(FC) -c  $(OPTS) $(MOD) src/move3d_omp.f90 -o obj/move3d.o 
 
-obj/move3s.o: src/move3s.f90 obj/mods.o 
-	$(FC) -c  $(OPTS) $(MOD) src/move3s.f90 -o obj/move3s.o 
+obj/move3s.o: src/move3s_omp.f90 obj/mods.o 
+	$(FC) -c  $(OPTS) $(MOD) src/move3s_omp.f90 -o obj/move3s.o 
 
 obj/move4d.o: src/move4d.f90 obj/mods.o 
 	$(FC) -c  $(OPTS) $(MOD) src/move4d.f90 -o obj/move4d.o 
@@ -245,8 +245,8 @@ obj/move5d.o: src/move5d.f90 obj/mods.o
 obj/move5s.o: src/move5s.f90 obj/mods.o 
 	$(FC) -c  $(OPTS) $(MOD) src/move5s.f90 -o obj/move5s.o 
 
-obj/move6.o: src/move6.f90 obj/mods.o 
-	$(FC) -c  $(OPTS) $(MOD) src/move6.f90 -o obj/move6.o 
+obj/move6.o: src/move6_omp.f90 obj/mods.o 
+	$(FC) -c  $(OPTS) $(MOD) src/move6_omp.f90 -o obj/move6.o 
 
 obj/move7a.o: src/move7a.f90 obj/mods.o 
 	$(FC) -c  $(OPTS) $(MOD) src/move7a.f90 -o obj/move7a.o 
@@ -260,8 +260,8 @@ obj/move8.o: src/move8.f90 obj/mods.o
 obj/move9.o: src/move9.f90 obj/mods.o 
 	$(FC) -c  $(OPTS) $(MOD) src/move9.f90 -o obj/move9.o 
 
-obj/move_c_end.o: src/move_c_end.f90 obj/mods.o 
-	$(FC) -c  $(OPTS) $(MOD) src/move_c_end.f90 -o obj/move_c_end.o 
+obj/move_c_end.o: src/move_c_end_omp.f90 obj/mods.o 
+	$(FC) -c  $(OPTS) $(MOD) src/move_c_end_omp.f90 -o obj/move_c_end.o 
 
 obj/move_n_end.o: src/move_n_end.f90 obj/mods.o 
 	$(FC) -c  $(OPTS) $(MOD) src/move_n_end.f90 -o obj/move_n_end.o 

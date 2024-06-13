@@ -7,9 +7,10 @@
       use chainm
       use echain1
       use chain1
+      implicit none
 !$acc routine seq
 !$OMP declare target 
-      implicit none
+!      implicit none
       integer, value :: i
       real :: aaz
       if(mv(i).gt.0)then

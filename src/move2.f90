@@ -58,7 +58,7 @@ c     choose the position of (m) ----------->
 cccc  all the pairs have at least one another pair, so nc>=2
       nc=Np2(ica(m),ica(m1))    !number of pathes from m to m2
 
-c     choose p'th new path from (m) to (m2) -------------->
+c     choose pth new path from (m) to (m2) -------------->
  201  p=int(aranzy(nozy)*nc)+1    ![1,nc]
       nn(m)=v21(ica(m),ica(m1),p)
       if(.not.goodc(ica(m-1),nn(m))) goto 201

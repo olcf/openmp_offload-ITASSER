@@ -8,8 +8,8 @@
       use chain1
       use echain1
 ! !$acc routine seq
-!$OMP declare target
       implicit none
+!$OMP declare target      
       integer, value :: i
       real :: aax
 

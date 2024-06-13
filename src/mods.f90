@@ -18,6 +18,7 @@ c 3456789012345678901234567890123456789012345678901234567890123456789012345678
           integer,  parameter :: ndim = 1500
           integer,  parameter ::  nrep = 100
           integer,  parameter :: nvec = 416
+! !$OMP declare target(ndim,nrep,nvec)
       end module params
 
 
@@ -153,7 +154,7 @@ c 3456789012345678901234567890123456789012345678901234567890123456789012345678
       end module hbb
 
       module chain1
-             integer  x(1500),y(1500),z(1500)
+             integer  x(1500),y(1500),z(1500)  !integer
              integer ica(0:1500)
 ! !$OMP declare target(x,y,z,ica)
 !$OMP declare target(x,y,z,ica)

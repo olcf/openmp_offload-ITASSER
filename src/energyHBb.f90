@@ -7,9 +7,10 @@
       use ENERGY
       use hba
       use hbb
+      implicit none
 !$acc routine seq
 !$OMP declare target 
-      implicit none
+!      implicit none
       integer, value :: i, k
       real, value :: a,axki,ayki,azki,dxi,dyi,dzi,dxk,dyk,dzk
       real :: bxk,byk,bzk,bxi,byi,bzi,br,b
